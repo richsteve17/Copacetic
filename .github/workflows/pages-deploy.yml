@@ -19,7 +19,7 @@ jobs:
       artifact-id: ${{ steps.upload.outputs.artifact_id }}
     steps:
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         id: upload
         with:
           path: ./docs
@@ -29,4 +29,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
