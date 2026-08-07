@@ -1,1 +1,1 @@
-# Copacetic-
+# Copacetic
