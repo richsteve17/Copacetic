@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Abstract sigil: crescent moon of two arcs with a small orbiting dot at upper right -->
+  <g stroke="#FB7185" fill="none">
+    <path d="M 330 76 A 180 180 0 1 0 330 436 A 150 150 0 1 1 330 76 Z" stroke-width="18" stroke-linejoin="round"/>
+    <circle cx="398" cy="104" r="22" stroke-width="14"/>
+  </g>
+</svg>
