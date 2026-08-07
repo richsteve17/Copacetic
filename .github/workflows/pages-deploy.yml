@@ -19,6 +19,8 @@ jobs:
     outputs:
       artifact-id: ${{ steps.upload.outputs.artifact_id }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         id: upload
