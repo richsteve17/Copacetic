@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script type="text/javascript">
-      // Segment the path and pass it to index.html via query string
-      var pathSegmentsToKeep = 0; // Set to 1 if using Project Pages (username.github.io/repo-name)
+      // Set to 1 because your project is in a repository sub-folder
+      var pathSegmentsToKeep = 1; 
+
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
