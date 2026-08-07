@@ -1,17 +1,26 @@
-# Copacetic
+# COPACETIC
 
-This repository contains the source and the built static site for COPACETIC.
+**It's not the model. It's the way you work.**
 
-Site status
-- The built site has been copied into the `docs/` folder on `main` so GitHub Pages can serve it.
-- I added an automated Pages deployment workflow so the site is published whenever `docs/` is updated.
+COPACETIC is an interactive AI tone simulator. Live the events, react honestly, and get the custom instructions that make your working style legible to any model.
 
-Live site
-- The Pages site will be (or is) available at: https://richsteve17.github.io/Copacetic/
-- Publication may take a minute after the workflow runs.
+## Live Site
 
-How it works
-- A GitHub Actions workflow (.github/workflows/pages-deploy.yml) uploads the contents of `docs/` and deploys to GitHub Pages using the official `actions/upload-pages-artifact` and `actions/deploy-pages` actions.
-- To update the site, push changes to `docs/` on `main` (or update source and push). The workflow will redeploy automatically.
+The app is deployed at: https://richsteve17.github.io/Copacetic/
 
-If you want me to remove the `extracted_files/` artifacts or move the source into a different branch, tell me and I will prepare a PR.
+## Development
+
+This repository contains the static build of the COPACETIC application in the `docs/` folder, ready for GitHub Pages deployment.
+
+### Deployment
+
+The site is automatically deployed via GitHub Actions when changes are pushed to the `docs/` folder. The workflow uses the official `actions/upload-pages-artifact` and `actions/deploy-pages` actions.
+
+To manually trigger a deployment, push changes to the `docs/` folder on the `main` branch.
+
+## Tech Stack
+
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion

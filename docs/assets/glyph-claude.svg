@@ -1,1 +1,13 @@
-(binary file contents omitted)
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Abstract sigil: eight-point asterisk/sunburst of tapered petals radiating from center -->
+  <g stroke="#F28C63" stroke-width="16" stroke-linecap="round" fill="none">
+    <path d="M 256 256 C 246 190 246 130 256 72 C 266 130 266 190 256 256 Z"/>
+    <path d="M 256 256 C 322 246 382 246 440 256 C 382 266 322 266 256 256 Z"/>
+    <path d="M 256 256 C 246 322 246 382 256 440 C 266 382 266 322 256 256 Z"/>
+    <path d="M 256 256 C 190 266 130 266 72 256 C 130 246 190 246 256 256 Z"/>
+    <path d="M 256 256 C 210 200 178 146 158 98 C 206 118 260 150 256 256 Z" transform="rotate(0 256 256)"/>
+    <path d="M 256 256 C 302 210 356 178 404 158 C 384 206 352 260 256 256 Z"/>
+    <path d="M 256 256 C 302 302 356 334 404 354 C 356 374 302 342 256 256 Z"/>
+    <path d="M 256 256 C 210 302 156 334 108 354 C 128 306 160 252 256 256 Z"/>
+  </g>
+</svg>
