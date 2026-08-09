@@ -22,7 +22,7 @@ export const ROSTER_SUMMARIES: Record<ModelId, string> = {
   kimi:
     'The anti-sycophant. Tough love, blunt referrals, and the lowest flattery scores on record.',
   muse:
-    'Meta’s agentic 1M-token software engineering engine co-trained alongside Muse Code for multi-file terminal refactoring.',
+    'Meta\'s agentic 1M-token engine — Muse Spark co-trained alongside Muse Code for multi-file terminal refactoring.',
 };
 
 export interface Fingerprint {

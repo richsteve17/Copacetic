@@ -140,7 +140,7 @@ export default function HeroSection() {
             transition={{ delay: 1.15, duration: 0.6 }}
             className="mt-10 text-label text-ink-low"
           >
-            7 SYSTEMS &middot; 12 EVENTS &middot; 4 TIERS &middot; 10 DIMENSIONS &middot; 0 RIGHT ANSWERS
+            8 SYSTEMS &middot; 12 EVENTS &middot; 4 TIERS &middot; 10 DIMENSIONS &middot; 0 RIGHT ANSWERS
           </motion.p>
         </div>
 
