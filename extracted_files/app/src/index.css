@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* COPACETIC — Calibration Room tokens (design.md §2) */
+    --void: #0B0B0F;
+    --base: #111118;
+    --surface-1: #17171F;
+    --surface-2: #1F1F29;
+    --surface-3: #282834;
+    --line-hair: rgba(244, 241, 232, 0.07);
+    --line-strong: rgba(244, 241, 232, 0.16);
+    --ink-hi: #F4F1E8;
+    --ink-mid: #A5A2AE;
+    --ink-low: #6A6775;
+
+    --human: #FFB648;
+    --human-hover: #FFC978;
+    --human-deep: #C77F1F;
+    --signal: #5CE8A0;
+    --heat: #FF6E63;
+    --ice: #7EC8F8;
+
+    --m-chatgpt: #34D399;
+    --m-claude: #F28C63;
+    --m-gemini: #8B9DFF;
+    --m-grok: #D9DEE7;
+    --m-qwen: #C084FC;
+    --m-deepseek: #38BDF8;
+    --m-kimi: #FB7185;
+
+    --ease-calibration: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-exit: cubic-bezier(0.64, 0, 0.78, 0);
+
+    /* shadcn/ui compatibility mapping */
+    --background: 240 14% 4%;
+    --foreground: 40 27% 93%;
+    --card: 240 15% 7%;
+    --card-foreground: 40 27% 93%;
+    --popover: 240 15% 7%;
+    --popover-foreground: 40 27% 93%;
+    --primary: 36 100% 64%;
+    --primary-foreground: 240 14% 4%;
+    --secondary: 240 13% 16%;
+    --secondary-foreground: 40 27% 93%;
+    --muted: 240 13% 16%;
+    --muted-foreground: 250 6% 66%;
+    --accent: 240 14% 21%;
+    --accent-foreground: 40 27% 93%;
+    --destructive: 4 100% 69%;
+    --destructive-foreground: 240 14% 4%;
+    --border: 40 27% 93%;
+    --input: 240 13% 16%;
+    --ring: 36 100% 64%;
+    --radius: 0.625rem;
+    --sidebar-background: 240 15% 7%;
+    --sidebar-foreground: 250 6% 66%;
+    --sidebar-primary: 36 100% 64%;
+    --sidebar-primary-foreground: 240 14% 4%;
+    --sidebar-accent: 240 14% 21%;
+    --sidebar-accent-foreground: 40 27% 93%;
+    --sidebar-border: 240 13% 16%;
+    --sidebar-ring: 36 100% 64%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--line-hair);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--void);
+    color: var(--ink-hi);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(255, 182, 72, 0.28);
+    color: var(--ink-hi);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--human);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+  }
+  .font-mono-telemetry {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  .text-display-xl {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-weight: 500;
+    font-size: clamp(3.25rem, 8vw, 6.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+  .text-display-lg {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-weight: 500;
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .text-display-md {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-weight: 500;
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+  .text-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+  .text-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+  .text-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .text-mono-sm {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+  .text-code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .text-index-hero {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-weight: 600;
+    font-size: clamp(4.5rem, 10vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Global grain overlay (design.md §4 background texture) */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .section-rule {
+    border-top: 1px solid var(--line-hair);
+  }
+
+  .ambient-shadow {
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .glow-human {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--human) 25%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
