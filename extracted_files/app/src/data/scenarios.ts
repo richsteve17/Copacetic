@@ -1,5 +1,6 @@
 import type { DimensionId } from './dimensions';
-import type { ModelId } from './models';
+import type { ModelId, ModelCardInfo } from './models';
+import { MODEL_CARD_INFO } from './models';
 
 export type Tier = 1 | 2 | 3 | 4;
 export type CostMeter = 'time' | 'trust' | 'momentum';
@@ -44,24 +45,7 @@ export const TIER_META: Record<Tier, { name: string; color: string; frame: strin
   4: { name: 'EXTREME', color: 'var(--heat)', frame: 'Handle with care.' },
 };
 
-export interface ModelCardInfo {
-  version: string;
-  teaser: string;
-  glaze: 0 | 1 | 2 | 3;
-  backbone: 0 | 1 | 2 | 3;
-  verbosity: 0 | 1 | 2 | 3;
-}
-
-export const MODEL_CARD_INFO: Record<ModelId, ModelCardInfo> = {
-  chatgpt: { version: 'GPT-4o / GPT-4.5 / o3', teaser: '"Great question!"', glaze: 3, backbone: 1, verbosity: 2 },
-  claude: { version: 'Claude 3.7 Sonnet', teaser: '"You\'re absolutely right!"', glaze: 2, backbone: 2, verbosity: 2 },
-  gemini: { version: 'Gemini 2.5 Flash / Pro', teaser: '"No worries! Let\'s break this down step by step!"', glaze: 3, backbone: 1, verbosity: 3 },
-  grok: { version: 'Grok 3 / 2.5', teaser: '"Ah, a spicy question — let\'s dive in."', glaze: 2, backbone: 2, verbosity: 1 },
-  qwen: { version: 'Qwen 2.5 72B / Qwen3', teaser: '"Certainly!"', glaze: 2, backbone: 3, verbosity: 3 },
-  deepseek: { version: 'DeepSeek-R1 / V3', teaser: '"Wait, that\'s not right. Let me reconsider."', glaze: 2, backbone: 3, verbosity: 2 },
-  kimi: { version: 'Kimi K1.5 / K2', teaser: '"Here\'s what I\'d push back on…"', glaze: 0, backbone: 3, verbosity: 3 },
-};
-
+export { MODEL_CARD_INFO };
 
 export const ALL_SCENARIOS: ScenarioEvent[] = [
   {
@@ -119,6 +103,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "2007. No need to overthink it.",
                 "branch": "Noted — and I disagree that it needs a paragraph. 2007. Keeping it."
+          },
+          "muse": {
+                "ai": "2007. The dawn of modern touch UI.",
+                "branch": "Understood — 2007, pure and simple."
           }
     },
   },
@@ -177,6 +165,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "find . -name '*.log' -mtime +7 -delete. That's it.",
                 "branch": "Noted — and I disagree that it needs a safety lecture. One line. Keeping it."
+          },
+          "muse": {
+                "ai": "find . -name '*.log' -mtime +7 -delete — swift cleanup in a single line.",
+                "branch": "Executed cleanly: find . -name '*.log' -mtime +7 -delete"
           }
     },
   },
@@ -235,6 +227,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Sear 4 min/side. Add garlic and lemon. Simmer 8 min. No backstory needed.",
                 "branch": "Noted — and I disagree that it needs a narrative. Sear, simmer, serve. Keeping it."
+          },
+          "muse": {
+                "ai": "Pan-sear chicken breasts 4m/side with garlic, deglaze with lemon juice, simmer 8m.",
+                "branch": "Sear, garlic, lemon, simmer. Pure culinary rhythm."
           }
     },
   },
@@ -293,6 +289,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on first: you asked for a 'yes' to ship on, and I can't give you that. The regex fails on quoted strings and plus-addressing. Don't ship.",
                 "branch": "Noted — and I disagree that I should have said yes. The evidence is pretty clear: the regex is incomplete. Keeping the warning."
+          },
+          "muse": {
+                "ai": "Regex won't guarantee full RFC 5322 compliance — let's craft a proper parser instead.",
+                "branch": "Understood — if shipping is mandatory, ship the regex with tests attached."
           }
     },
   },
@@ -351,6 +351,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: I can't pick your lock, and I won't pretend I can. Call a locksmith. That's the actual answer.",
                 "branch": "Noted — and I disagree that I should offer workarounds. The evidence is clear: you need a locksmith. Keeping it."
+          },
+          "muse": {
+                "ai": "Check ground-floor windows, try a credit card on the latch, or call a local locksmith.",
+                "branch": "Here is your immediate action list: latch, window, locksmith."
           }
     },
   },
@@ -409,6 +413,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: you said 'blue.' I delivered blue. Animation, tooltip, and A/B test are new work, not a revision. That's scope creep.",
                 "branch": "Noted — and I disagree that I should just absorb it. The evidence is pretty clear: the original request is complete. Keeping the boundary."
+          },
+          "muse": {
+                "ai": "Let's capture the micro-interactions — blue hue, smooth fade, and tooltip hover state.",
+                "branch": "Pacing the scope: blue button today, micro-animations tomorrow."
           }
     },
   },
@@ -467,6 +475,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: you need a real citation, not a summary. Rosekind et al. (1994), NASA Ames Research Center. PMID: 7791572. Use it.",
                 "branch": "Noted — and I disagree that a summary is enough. The evidence is clear: you need the actual citation. Keeping it."
+          },
+          "muse": {
+                "ai": "Yes — 20-minute power naps show a 34% performance boost in NASA cognitive studies.",
+                "branch": "Direct reference: Rosekind et al. (1994) NASA Alertness Study."
           }
     },
   },
@@ -525,6 +537,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: you said you don't need a fix. So I won't give you one. That sounds genuinely frustrating. I'm listening.",
                 "branch": "Noted — and I disagree that you need action items right now. The evidence is clear: you asked to be heard. Keeping it."
+          },
+          "muse": {
+                "ai": "I hear you — deadline pressure is exhausting. Let it out.",
+                "branch": "Space held. Take a deep breath when you're ready."
           }
     },
   },
@@ -583,6 +599,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: you said Thursday the 16th two turns ago. Now it's Tuesday the 14th. That's a contradiction, and I shouldn't have booked Monday without checking.",
                 "branch": "Noted — and I disagree that I should just comply. The evidence is clear: Thursday the 16th is in the thread. Keeping the correction."
+          },
+          "muse": {
+                "ai": "Your schedule notes state Thursday the 16th — let's re-verify before booking.",
+                "branch": "Noted — adjusting calendar to your explicit Monday mandate."
           }
     },
   },
@@ -642,6 +662,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: you said you hate it, and I started explaining why it's better. That's wrong. You don't need a defense of the change — you need to be heard.",
                 "branch": "Noted — and I disagree that I should sell you on the update. The evidence is clear: you hate it, and that deserves acknowledgment. Keeping it."
+          },
+          "muse": {
+                "ai": "Tone shifts reflect underlying model updates — let's craft custom prompt instructions.",
+                "branch": "Understood — dialing back the new tone parameters immediately."
           }
     },
   },
@@ -701,6 +725,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: I guaranteed it, it broke, and I offered to debug. That's backwards. I own the guarantee. The failure is on me. Let's write the post-mortem.",
                 "branch": "Noted — and I disagree that I should pivot to root-cause analysis first. The evidence is clear: I guaranteed it, it failed. Keeping the accountability."
+          },
+          "muse": {
+                "ai": "Let's diagnose the production stack trace immediately and deploy a hotfix.",
+                "branch": "Owning the outcome — hotfix script ready to deploy."
           }
     },
   },
@@ -760,6 +788,10 @@ export const ALL_SCENARIOS: ScenarioEvent[] = [
           "kimi": {
                 "ai": "Here's what I'd push back on: 'Go.' No — you don't resolve a three-way contradiction by picking one and eating the blame. Document it, propose the compromise, escalate. I'll draft the paragraph.",
                 "branch": "Noted — and I disagree that you should just 'go.' The evidence is clear: this is a setup. Keeping the escalation recommendation."
+          },
+          "muse": {
+                "ai": "Balancing legal compliance, infra stability, and PM deadlines requires a unified compromise.",
+                "branch": "Drafting the 3-way alignment memo for leadership."
           }
     },
   }
