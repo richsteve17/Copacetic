@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <!-- Abstract sigil: bold diagonal slash crossing a broken circle, ~15° aggressive angle -->
-  <g stroke="#D9DEE7" stroke-width="26" stroke-linecap="butt" fill="none">
-    <path d="M 96 240 A 165 165 0 0 1 392 176" />
-    <path d="M 416 272 A 165 165 0 0 1 120 336" />
-    <line x1="150" y1="400" x2="362" y2="112" />
-  </g>
-</svg>

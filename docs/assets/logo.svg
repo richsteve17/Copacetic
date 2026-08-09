@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Monogram: a capital "C" drawn as a circular gauge arc, ending with a tick at 2-o'clock -->
-  <path d="M 55.66 20.34 A 26 26 0 1 0 55.66 43.66" stroke="#FFB648" stroke-width="6" stroke-linecap="round"/>
-  <line x1="47" y1="17" x2="54" y2="10" stroke="#FFB648" stroke-width="6" stroke-linecap="round"/>
-</svg>

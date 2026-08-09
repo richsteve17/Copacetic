@@ -1,11 +1,12 @@
 import { Routes, Route } from 'react-router';
-import { RunsProvider } from '@/state/runs';
-import Layout from '@/components/Layout';
-import Home from '@/pages/Home';
-import Simulator from '@/pages/Simulator';
-import Models from '@/pages/Models';
-import Results from '@/pages/Results';
-import Method from '@/pages/Method';
+import { RunsProvider } from './state/runs';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Simulator from './pages/Simulator';
+import Models from './pages/Models';
+import Results from './pages/Results';
+import Method from './pages/Method';
+
 
 export default function App() {
   return (
