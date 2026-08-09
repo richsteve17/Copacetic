@@ -77,7 +77,8 @@ export default function CopyBlock({ doc, generatedAt, copyAllPayload, notify }: 
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{ backgroundImage: 'url(/assets/paper-grain.png)', backgroundSize: '512px' }}
+        style={{ backgroundImage: 'url(./assets/paper-grain.png)', backgroundSize: '512px' }}
+
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.05 }}
         transition={{ delay: 0.9, duration: 0.4 }}

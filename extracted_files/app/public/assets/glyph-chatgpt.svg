@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Abstract sigil: six interlocking rounded segments forming a loose knot/rosette -->
+  <g stroke="#34D399" stroke-width="18" stroke-linecap="round">
+    <path d="M 256 84 C 316 84 356 128 356 178 C 356 214 336 244 306 260"/>
+    <path d="M 405 170 C 455 200 477 256 461 307 C 449 342 421 364 386 369"/>
+    <path d="M 405 342 C 405 402 361 442 311 442 C 275 442 245 422 229 392"/>
+    <path d="M 256 428 C 196 428 156 384 156 334 C 156 298 176 268 206 252"/>
+    <path d="M 107 342 C 57 312 35 256 51 205 C 63 170 91 148 126 143"/>
+    <path d="M 107 170 C 107 110 151 70 201 70 C 237 70 267 90 283 120"/>
+  </g>
+</svg>

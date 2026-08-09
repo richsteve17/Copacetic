@@ -60,7 +60,8 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-line-hair bg-[rgba(11,11,15,0.72)] backdrop-blur-[14px]">
       <nav className="mx-auto flex h-full max-w-container items-center justify-between px-[clamp(20px,4vw,48px)]">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <img src="/assets/logo.svg" alt="COPACETIC logo" width={24} height={24} />
+          <img src="./assets/logo.svg" alt="COPACETIC logo" width={24} height={24} />
+
           <span className="font-mono text-sm font-bold tracking-[0.32em] text-ink-hi">COPACETIC</span>
         </Link>
 

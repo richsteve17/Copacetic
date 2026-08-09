@@ -8,7 +8,8 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2.5">
-              <img src="/assets/logo.svg" alt="COPACETIC logo" width={24} height={24} />
+              <img src="./assets/logo.svg" alt="COPACETIC logo" width={24} height={24} />
+
               <span className="font-mono text-sm font-bold tracking-[0.32em] text-ink-hi">COPACETIC</span>
             </div>
             <p className="mt-4 font-display text-lg italic text-ink-hi">

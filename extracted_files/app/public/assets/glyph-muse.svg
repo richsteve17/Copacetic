@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Meta Muse sigil: interlocking spark rings -->
+  <g stroke="#E879F9" stroke-width="18" stroke-linecap="round">
+    <path d="M 256 90 C 330 90 390 150 390 224 C 390 298 330 358 256 358 C 182 358 122 298 122 224 C 122 150 182 90 256 90 Z" />
+    <path d="M 256 154 C 295 154 326 185 326 224 C 326 263 295 294 256 294 C 217 294 186 263 186 224 C 186 185 217 154 256 154 Z" opacity="0.6" />
+    <circle cx="256" cy="224" r="28" fill="#E879F9" />
+  </g>
+</svg>

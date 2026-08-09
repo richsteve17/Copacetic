@@ -230,7 +230,8 @@ export default function Method() {
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.04]"
-                style={{ backgroundImage: "url('/assets/paper-grain.png')", backgroundSize: '512px' }}
+                style={{ backgroundImage: "url('./assets/paper-grain.png')", backgroundSize: '512px' }}
+
                 aria-hidden
               />
               <motion.span

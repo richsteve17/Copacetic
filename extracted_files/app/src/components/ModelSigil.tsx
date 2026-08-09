@@ -18,13 +18,14 @@ export default function ModelSigil({ model, size = 'md', withName = false, class
   return (
     <span className={cn('inline-flex items-center gap-2', className)}>
       <img
-        src={`/assets/glyph-${model}.svg`}
+        src={`./assets/glyph-${model}.svg`}
         alt={`${profile.name} sigil`}
         width={px}
         height={px}
         style={{ width: px, height: px }}
         className="shrink-0"
       />
+
       {withName && (
         <span className="text-label" style={{ color: profile.color }}>
           {profile.name}
