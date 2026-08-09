@@ -53,14 +53,15 @@ export interface ModelCardInfo {
 }
 
 export const MODEL_CARD_INFO: Record<ModelId, ModelCardInfo> = {
-  chatgpt: { version: 'GPT-4o / GPT-5 era', teaser: '"Great question!"', glaze: 3, backbone: 1, verbosity: 2 },
-  claude: { version: 'Sonnet 4.5 era', teaser: '"You\'re absolutely right!"', glaze: 2, backbone: 2, verbosity: 2 },
-  gemini: { version: '2.5 Pro / 3 era', teaser: '"No worries! Let\'s break this down step by step!"', glaze: 3, backbone: 1, verbosity: 3 },
-  grok: { version: 'Grok 4.1 era', teaser: '"Ah, a spicy question — let\'s dive in."', glaze: 2, backbone: 2, verbosity: 1 },
-  qwen: { version: 'Qwen3 era', teaser: '"Certainly!"', glaze: 2, backbone: 3, verbosity: 3 },
-  deepseek: { version: 'V3.2 / R1 era', teaser: '"Wait, that\'s not right. Let me reconsider."', glaze: 2, backbone: 3, verbosity: 2 },
-  kimi: { version: 'K2 Thinking era', teaser: '"Here\'s what I\'d push back on…"', glaze: 0, backbone: 3, verbosity: 3 },
+  chatgpt: { version: 'GPT-4o / GPT-4.5 / o3', teaser: '"Great question!"', glaze: 3, backbone: 1, verbosity: 2 },
+  claude: { version: 'Claude 3.7 Sonnet', teaser: '"You\'re absolutely right!"', glaze: 2, backbone: 2, verbosity: 2 },
+  gemini: { version: 'Gemini 2.5 Flash / Pro', teaser: '"No worries! Let\'s break this down step by step!"', glaze: 3, backbone: 1, verbosity: 3 },
+  grok: { version: 'Grok 3 / 2.5', teaser: '"Ah, a spicy question — let\'s dive in."', glaze: 2, backbone: 2, verbosity: 1 },
+  qwen: { version: 'Qwen 2.5 72B / Qwen3', teaser: '"Certainly!"', glaze: 2, backbone: 3, verbosity: 3 },
+  deepseek: { version: 'DeepSeek-R1 / V3', teaser: '"Wait, that\'s not right. Let me reconsider."', glaze: 2, backbone: 3, verbosity: 2 },
+  kimi: { version: 'Kimi K1.5 / K2', teaser: '"Here\'s what I\'d push back on…"', glaze: 0, backbone: 3, verbosity: 3 },
 };
+
 
 export const ALL_SCENARIOS: ScenarioEvent[] = [
   {

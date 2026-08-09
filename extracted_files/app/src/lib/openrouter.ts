@@ -26,7 +26,7 @@ export function setStoredApiKey(key: string): void {
   }
 }
 
-// Default mapping of COPACETIC system keys to top OpenRouter model IDs
+// Latest flagship mapping for OpenRouter API endpoints
 export const DEFAULT_MODEL_MAP: Record<string, string> = {
   chatgpt: 'openai/gpt-4o',
   claude: 'anthropic/claude-3.7-sonnet',
@@ -127,7 +127,7 @@ export async function streamOpenRouterCompletion({
               onToken(delta);
             }
           } catch (e) {
-            // Ignore parse errors on partial chunks
+            // Ignore partial JSON parse chunks
           }
         }
       }
