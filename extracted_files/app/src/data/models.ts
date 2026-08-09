@@ -282,12 +282,12 @@ export const MODELS: ModelProfile[] = [
   {
     id: 'muse',
     name: 'Muse',
-    vendor: 'Creative AI',
+    vendor: 'Meta',
     color: '#E879F9',
     colorToken: '--m-muse',
-    tagline: '"Let\'s compose this together." — the creative spark engine.',
+    tagline: '"Let\'s compose this together." — Meta\'s creative spark engine.',
     register:
-      'Muse Spark 1.2 — Expressive, artistic generation engine designed for creative synthesis, design ideation, and tone crafting.',
+      'Muse Spark 1.2 — Meta\'s expressive, artistic generation engine designed for creative synthesis, design ideation, and tone crafting.',
     sycophancy:
       'Collaborative alignment without reflexive agreement; suggests creative alternatives.',
     refusals:
@@ -304,15 +304,16 @@ export const MODELS: ModelProfile[] = [
       'Here is an evocative alternative:',
     ],
     flagshipIncident: {
-      title: 'Muse Spark 1.2 Release',
+      title: 'Meta Muse Spark 1.2 Release',
       summary:
-        'Creative AI launched Muse Spark 1.2 for intuitive multi-modal artistic synthesis.',
+        'Meta launched Muse Spark 1.2 for intuitive multi-modal artistic synthesis and expressive voice generation.',
     },
     sources: [
-      { label: 'Muse AI — Spark 1.2 Release', url: 'https://muse.ai' },
+      { label: 'Meta AI — Muse Spark 1.2 Release', url: 'https://ai.meta.com' },
     ],
     cadence: { msPerChar: 14, burst: true },
   },
+
 ];
 
 export const MODEL_CARD_INFO: Record<ModelId, {

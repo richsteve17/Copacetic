@@ -35,8 +35,9 @@ export const DEFAULT_MODEL_MAP: Record<string, string> = {
   grok: 'x-ai/grok-2-1212',
   kimi: 'moonshotai/kimi-k1.5',
   qwen: 'qwen/qwen-2.5-72b-instruct',
-  muse: 'mistralai/mistral-large-2411',
+  muse: 'meta-llama/llama-3.3-70b-instruct',
 };
+
 
 
 export async function fetchOpenRouterModels(): Promise<OpenRouterModel[]> {
