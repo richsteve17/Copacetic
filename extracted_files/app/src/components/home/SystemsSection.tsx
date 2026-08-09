@@ -37,6 +37,10 @@ const TICS: Record<string, { phrase: string; tic: string }> = {
     phrase: '"Here\u2019s what I\u2019d push back on…"',
     tic: 'The anti-sycophant. Lowest flattery scores on record; famous for "What you need right now is not validation."',
   },
+  muse: {
+    phrase: '"Let\u2019s compose this together."',
+    tic: 'Meta’s 1M-token agentic software engineering engine co-trained alongside Muse Code for multi-file terminal refactoring.',
+  },
 };
 
 function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
@@ -50,13 +54,14 @@ function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
           <div key={`${m.id}-${i}`} className="flex items-center gap-3 whitespace-nowrap transition-transform duration-200 hover:scale-[1.04]">
             <ModelSigil model={m.id} size="md" />
             <span className="font-display text-2xl" style={{ color: m.color }}>{m.name}</span>
-            <span className="text-mono-sm text-ink-low">{TICS[m.id].phrase}</span>
+            <span className="text-mono-sm text-ink-low">{TICS[m.id]?.phrase ?? m.tagline}</span>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
 
 /** Section 4 — The Seven Systems (marquee + dossier grid). */
 export default function SystemsSection() {
@@ -101,8 +106,9 @@ export default function SystemsSection() {
                   <p className="text-label text-ink-low">{m.vendor}</p>
                 </div>
               </div>
-              <p className="mt-4 font-mono text-[0.8125rem] text-ink-hi">{TICS[m.id].phrase}</p>
-              <p className="mt-2 flex-1 text-body-sm text-ink-mid">{TICS[m.id].tic}</p>
+              <p className="mt-4 font-mono text-[0.8125rem] text-ink-hi">{TICS[m.id]?.phrase ?? m.tagline}</p>
+              <p className="mt-2 flex-1 text-body-sm text-ink-mid">{TICS[m.id]?.tic ?? m.register}</p>
+
               <div className="mt-5 flex items-center justify-between gap-3">
                 <Link
                   to={`/models#${m.id}`}

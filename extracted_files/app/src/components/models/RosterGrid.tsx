@@ -20,7 +20,9 @@ const SPANS: Record<ModelId, string> = {
   qwen: 'lg:col-span-4',
   deepseek: 'lg:col-span-6',
   kimi: 'lg:col-span-6',
+  muse: 'lg:col-span-6',
 };
+
 
 interface RosterGridProps {
   onFullProfile: (id: ModelId) => void;
@@ -102,10 +104,11 @@ export default function RosterGrid({ onFullProfile }: RosterGridProps) {
       <SectionLabel index="01" title="THE ROSTER" className="mb-12" />
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12">
         {MODELS.map((m, i) => (
-          <div key={m.id} className={SPANS[m.id]}>
+          <div key={m.id} className={SPANS[m.id] ?? 'lg:col-span-6'}>
             <RosterCard profile={m} index={i} onFullProfile={onFullProfile} />
           </div>
         ))}
+
       </div>
     </section>
   );
