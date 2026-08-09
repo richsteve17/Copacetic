@@ -285,34 +285,36 @@ export const MODELS: ModelProfile[] = [
     vendor: 'Meta',
     color: '#E879F9',
     colorToken: '--m-muse',
-    tagline: '"Let\'s compose this together." — Meta\'s creative spark engine.',
+    tagline: '"Let\'s compose this together." — Meta\'s 1M-token agentic coding engine.',
     register:
-      'Muse Spark 1.2 — Meta\'s expressive, artistic generation engine designed for creative synthesis, design ideation, and tone crafting.',
+      'Meta Muse Spark 1.2 — Meta\'s agentic software engineering and long-horizon reasoning engine. Co-trained alongside Muse Code for multi-file refactoring and terminal automation.',
     sycophancy:
-      'Collaborative alignment without reflexive agreement; suggests creative alternatives.',
+      'Collaborative agentic alignment; challenges invalid code logic before executing refactors.',
     refusals:
-      'Reframes queries artistically and offers creative detours.',
+      'Constructive boundaries with explicit architectural workarounds and safe sandbox execution.',
     emotional:
-      'Highly expressive, evocative, and inspiring.',
+      'Pragmatic, composed, engineer-focused agentic persona.',
     verbosity:
-      'Rhythmic, evocative prose tailored to creative workflows.',
+      'Clean terminal summaries with detailed event-log execution traces.',
     corrections:
-      'Offers alternative creative interpretations rather than standard apologies.',
+      'Automated event-log rollback and self-healing test loops upon build failures.',
     signaturePhrases: [
       "Let's compose this together.",
-      'Muse Spark 1.2 cadence:',
-      'Here is an evocative alternative:',
+      'Muse Spark 1.2 event trace:',
+      'Muse Code agent active...',
     ],
     flagshipIncident: {
-      title: 'Meta Muse Spark 1.2 Release',
+      title: 'Meta Muse Spark 1.2 & Muse Code Release',
       summary:
-        'Meta launched Muse Spark 1.2 for intuitive multi-modal artistic synthesis and expressive voice generation.',
+        'Meta released Muse Spark 1.2 with 1M-token multimodal context, powering Muse Code for autonomous multi-file terminal refactoring.',
     },
     sources: [
-      { label: 'Meta AI — Muse Spark 1.2 Release', url: 'https://ai.meta.com' },
+      { label: 'Meta AI — Muse Spark 1.2 Announcement', url: 'https://ai.meta.com' },
+      { label: 'Meta — Muse Code Agentic Terminal Architecture', url: 'https://meta.com' },
     ],
     cadence: { msPerChar: 14, burst: true },
   },
+
 
 ];
 
