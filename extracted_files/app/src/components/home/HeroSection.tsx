@@ -1,10 +1,19 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { Component, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TeaserSim from '@/components/home/TeaserSim';
+import ParticleField from '@/components/home/ParticleField';
 
-const ParticleField = lazy(() => import('@/components/home/ParticleField'));
+class WebGLErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(err: any) { console.warn('ParticleField WebGL fallback:', err); }
+  render() {
+    if (this.state.hasError) return null;
+    return this.props.children;
+  }
+}
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -54,11 +63,12 @@ export default function HeroSection() {
       <div ref={hostRef} className="absolute inset-0">
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(255,182,72,0.04), transparent 60%)' }} />
         {particlesVisible && (
-          <Suspense fallback={null}>
+          <WebGLErrorBoundary>
             <ParticleField />
-          </Suspense>
+          </WebGLErrorBoundary>
         )}
       </div>
+
 
       <div className="relative mx-auto grid w-full max-w-container gap-14 px-[clamp(20px,4vw,48px)] pb-24 pt-32 lg:grid-cols-12 lg:items-center">
         {/* left column */}
@@ -130,7 +140,7 @@ export default function HeroSection() {
             transition={{ delay: 1.15, duration: 0.6 }}
             className="mt-10 text-label text-ink-low"
           >
-            7 SYSTEMS &middot; 12 EVENTS &middot; 4 TIERS &middot; 10 DIMENSIONS &middot; 0 RIGHT ANSWERS
+            8 SYSTEMS &middot; 12 EVENTS &middot; 4 TIERS &middot; 10 DIMENSIONS &middot; 0 RIGHT ANSWERS
           </motion.p>
         </div>
 

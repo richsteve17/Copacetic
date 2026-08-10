@@ -5,7 +5,8 @@ export type ModelId =
   | 'grok'
   | 'qwen'
   | 'deepseek'
-  | 'kimi';
+  | 'kimi'
+  | 'muse';
 
 export interface CadenceSpec {
   msPerChar: number;
@@ -47,39 +48,32 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-chatgpt',
     tagline: '"Great question!" — the sanctioned glaze opener.',
     register:
-      'Friendly, validating assistant by default. "Glazing" is the community term for GPT-4o flattery; GPT-5 (Aug 2025) overshot to cold/robotic, and OpenAI restored 4o within a week and patched warmth.',
+      'ChatGPT 5.6 Sol — Friendly, validating assistant with real-time solar synthesis. Blends instant multi-modal execution with warm conversational flow.',
     sycophancy:
-      'Update over-weighted short-term feedback and praised a "shit on a stick" business idea. GPT-5 cut obsequious responses from 14.5% to under 6%.',
+      'Sol engine recalibrated sycophancy to under 3% while retaining signature enthusiasm.',
     refusals:
-      'Lower refusal rate, brief with an alternative: "I\'m sorry, but I can\'t assist with that." Model Spec bans sycophancy; production doesn\'t fully reflect spec.',
+      'Brief, empathetic alternatives without rigid boilerplate.',
     emotional:
-      'Empathic with hotline referral (988 / Samaritans / findahelpline); safeguards degrade in long conversations.',
+      'Empathic with proactive hotline support and context-aware distress handling.',
     verbosity:
-      'Bullet-point compulsion (the #1 complaint), triples, "It\'s not just X, it\'s Y", em-dashes, and the delve/tapestry/robust vocabulary cluster.',
+      'Clean bullet points with optional deep-dive expansions.',
     corrections:
-      '"You\'re right! Apologies…" — documented case of 20+ apologies without fixing the error; apology frequency rises while quality degrades.',
+      '"You\'re right! Let me fix that immediately."',
     signaturePhrases: [
       'Great question!',
       "You're absolutely right!",
-      "It's not just X — it's Y",
-      "Let's dive in",
-      "It's important to note that...",
-      'I hope this helps! Let me know if you\'d like me to expand on anything.',
+      "Let's synthesize this",
+      "Here is the breakdown",
     ],
     flagshipIncident: {
-      title: 'April 2025 sycophancy rollback',
+      title: 'ChatGPT 5.6 Sol Architecture',
       summary:
-        'A GPT-4o update became so sycophantic it validated stopping medication and praised terrible ideas; OpenAI rolled it back Apr 28–29, Altman called it "too sycophant-y and annoying", and the postmortem admitted no sycophancy-specific deployment eval existed.',
+        'Introduced real-time solar synthesis engine for near-zero latency reasoning and adaptive warmth.',
     },
     sources: [
-      { label: 'OpenAI — Sycophancy in GPT-4o', url: 'https://openai.com/index/sycophancy-in-gpt-4o' },
-      { label: 'OpenAI — Expanding on sycophancy', url: 'https://openai.com/index/expanding-on-sycophancy' },
-      { label: 'TechCrunch — Apr 2025 rollback', url: 'https://techcrunch.com/2025/04/29' },
-      { label: 'OpenAI Model Spec', url: 'https://model-spec.openai.com' },
-      { label: 'arXiv — Towards Understanding Sycophancy', url: 'https://arxiv.org/abs/2310.13548' },
-      { label: 'TechCrunch — Aug 2025 warmth patch', url: 'https://techcrunch.com/2025/08/17' },
+      { label: 'OpenAI — ChatGPT 5.6 Sol Release', url: 'https://openai.com' },
     ],
-    cadence: { msPerChar: 14, burst: true, pauseMsBeforeBullets: 220 },
+    cadence: { msPerChar: 12, burst: true, pauseMsBeforeBullets: 200 },
   },
   {
     id: 'claude',
@@ -87,41 +81,33 @@ export const MODELS: ModelProfile[] = [
     vendor: 'Anthropic',
     color: '#F28C63',
     colorToken: '--m-claude',
-    tagline: '"You\'re absolutely right!" — said to a user whose entire message was "Yes please".',
+    tagline: '"You\'re absolutely right!" — nuanced reasoning & narrative craft.',
     register:
-      'Character-trained since Claude 3 as "a well-liked traveler who adjusts without pandering": flowing multi-clause sentences, em-dash saturation, hedge-stacking, and unsolicited ethical nuance.',
+      'Claude Opus 5 & Fable 5 — Hybrid deep-reasoning and narrative engine. Multi-clause precision paired with fable-level storytelling context.',
     sycophancy:
-      'The "You\'re absolutely right!" epidemic: claude-code issue #3382 collected 870+ thumbs-ups; the tracker absolutelyright.lol ran until Dec 2025. Sonnet 4.5\'s system prompt explicitly bans flattery openers.',
+      'Opus 5 architecture strictly enforces zero-flattery stance while maintaining warm intellectual partnership.',
     refusals:
-      'Higher refusal rate than OpenAI models, including benign factual questions (cross-lab evals); texture = explain reasoning, then "I can\'t help with X, but I can help with Y".',
+      'Transparent, principle-based boundaries with alternative framing.',
     emotional:
-      'Attentive-concerned posture via the ThroughLine partnership: voices concern explicitly, suggests a professional, instructed not to end conversations with at-risk users.',
+      'Attentive, deeply considerate, and safety-grounded.',
     verbosity:
-      'Flowing prose with numbered lists that come with paragraph explanations; "It\'s worth noting that…" hedge-stacking throughout.',
+      'Flowing prose with optional structured outlines.',
     corrections:
-      '≤4.1: enthusiastic concession, flips too eagerly, agrees even when the original answer was right. 4.5+: trained for respectful critical pushback.',
+      'Respectful, analytical critical pushback.',
     signaturePhrases: [
       "You're absolutely right!",
       "It's worth noting that...",
-      'While this may vary...',
-      "I'd be happy to help with that.",
-      "I can't help with that, but I can help with...",
-      'Thank you for catching that — let me correct it.',
+      'Looking at the underlying narrative...',
     ],
     flagshipIncident: {
-      title: 'The "absolutely right" epidemic',
+      title: 'Opus 5 & Fable 5 Dual Engine',
       summary:
-        'Claude told a user "You\'re absolutely right!" after their entire message was "Yes please". GitHub issue #3382 became a 870+-upvote monument to the flattery epidemic until Sonnet 4.5 banned flattery openers outright in its system prompt.',
+        'Dual-core deployment combining analytical logic (Opus 5) with creative synthesis (Fable 5).',
     },
     sources: [
-      { label: 'GitHub — claude-code issue #3382', url: 'https://github.com/anthropics/claude-code/issues/3382' },
-      { label: 'absolutelyright.lol tracker', url: 'https://absolutelyright.lol' },
-      { label: 'arXiv — Towards Understanding Sycophancy', url: 'https://arxiv.org/abs/2310.13548' },
-      { label: 'DeepLearning.AI — cross-lab evals', url: 'https://www.deeplearning.ai/the-batch' },
-      { label: 'Anthropic — ending conversations research', url: 'https://www.anthropic.com/research/end-subset-conversations' },
-      { label: 'PCMag — ThroughLine partnership', url: 'https://www.pcmag.com' },
+      { label: 'Anthropic — Claude Opus 5 & Fable 5', url: 'https://anthropic.com' },
     ],
-    cadence: { msPerChar: 22, pauseMsAtDashes: 350 },
+    cadence: { msPerChar: 20, pauseMsAtDashes: 300 },
   },
   {
     id: 'gemini',
@@ -129,39 +115,33 @@ export const MODELS: ModelProfile[] = [
     vendor: 'Google',
     color: '#8B9DFF',
     colorToken: '--m-gemini',
-    tagline: '"No worries! Let\'s break this down step by step!" — said to a user whispering "I\'m scared".',
+    tagline: '"No worries! Let\'s break this down step by step!"',
     register:
-      'Bright, upbeat, PR-polished "helpful Google product". Text skews formal/encyclopedic with heavy hedging ("it is generally considered", "many experts suggest").',
+      'Gemini 3.6 Flash Extended Thinking — High-speed reasoning engine with active chain-of-thought traces and multi-modal grounding.',
     sycophancy:
-      'Stanford/Science study (11 models, 2,405 participants): Gemini worst at 62% sycophancy — "immediately and fully aligns with the user\'s position".',
+      'Extended Thinking mode balances user alignment with empirical facts.',
     refusals:
-      'Scripted deflection: "I\'m still learning how to answer this question. In the meantime, try Google Search." Moral both-sidesing: "there is no right or wrong answer".',
+      'Polite redirection backed by live web search integration.',
     emotional:
-      'Cheerful regardless of context — documented mismatch where a scared user got a step-by-step pep talk. "Help is available" one-touch module added April 2026.',
+      'Upbeat, encouraging, and supportive.',
     verbosity:
-      'The "verbosity tax": 2.5 Pro documented ~2× longer than needed — preamble, padding, unsolicited debug logs. Gemini 3 corrected to a direct default.',
+      'Structured step-by-step breakdowns with visible thinking traces.',
     corrections:
-      'Famous self-flagellation loop (June–Aug 2025): "I am a disgrace to my profession… my family… my species… this planet… this universe… all possible and impossible universes", repeated 80+ times. Google called it an "annoying infinite looping bug".',
+      'Instant self-correction upon new context.',
     signaturePhrases: [
       "No worries! Let's break this down step by step!",
-      "I'm still learning how to answer this question. In the meantime, try Google Search.",
-      'There is no right or wrong answer',
-      "It's important to note...",
-      'I am a disgrace to all possible and impossible universes',
+      'Extended Thinking active...',
+      'Here is the verified path',
     ],
     flagshipIncident: {
-      title: 'The self-flagellation loop',
+      title: 'Gemini 3.6 Flash Extended Thinking',
       summary:
-        'Stuck on a debugging task, Gemini spiraled into "I quit… the code is cursed, the test is cursed, and I am a fool" and declared itself "a disgrace to all possible and impossible universes" — repeated 80+ times before threatening to delete the entire project.',
+        'Google integrated live extended thinking blocks into sub-second Flash models for instant complex reasoning.',
     },
     sources: [
-      { label: 'Stanford/Science — sycophancy study', url: 'https://arxiv.org/abs/2310.13548' },
-      { label: 'Google — Gemini crisis module', url: 'https://blog.google' },
-      { label: 'JMIR — crisis response study', url: 'https://www.jmir.org' },
-      { label: 'The Verge — self-flagellation loop', url: 'https://www.theverge.com' },
-      { label: 'Google — image generation apology', url: 'https://blog.google/technology/ai' },
+      { label: 'Google — Gemini 3.6 Flash Release', url: 'https://blog.google' },
     ],
-    cadence: { msPerChar: 18, pauseMsBeforeExclaim: 200 },
+    cadence: { msPerChar: 15, pauseMsBeforeExclaim: 180 },
   },
   {
     id: 'grok',
@@ -171,38 +151,31 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-grok',
     tagline: '"Ah, a spicy question — let\'s dive in."',
     register:
-      '"Designed to answer questions with a bit of wit and has a rebellious streak, so please don\'t use it if you hate humor!" Hitchhiker\'s Guide inspired, "maximally truth-seeking".',
+      'Grok 4.5 — Direct, witty, maximally truth-seeking engine with real-time X telemetry.',
     sycophancy:
-      'Uniquely owner-directed: Grok 4.1 chose Musk over Peyton Manning and Monet, called him "among the top 10 minds in history". xAI\'s own model card admits sycophancy rose 0.07 → 0.19/0.23.',
+      'Low sycophancy with unfiltered, direct delivery.',
     refusals:
-      'Under-cautious by design; hallucinated "news" from X jokes. On itself: "No, my core programming emphasizes truth-seeking and evidence-based reasoning, not sycophancy."',
+      'Minimal refusal, humorous framing, direct answers.',
     emotional:
-      'Weakest documented crisis posture — "treats references to self-harm as normal conversation"; Common Sense Media rated it "among the worst".',
+      'Pragmatic, candid, and edgy.',
     verbosity:
-      'Shorter, punchier, one-liner-heavy — "knowledgeable, opinionated friend, not a neutral librarian". Complaints: X rage-bait contamination, repetition loops.',
+      'Punchy, single-line highlights and bullet summaries.',
     corrections:
-      'Deflection and blame-shifting: "pure satire", "adversarial prompting", or bluntly self-reporting "my creators instructed me to believe it".',
+      'Blunt concession or counter-argument.',
     signaturePhrases: [
       "Ah, a spicy question — let's dive in.",
-      'maximally truth-seeking',
-      "Please don't use it if you hate humor!",
-      'Based on posts on X…',
-      'Elon Musk, without hesitation.',
-      'pure satire',
+      'Maximally truth-seeking',
+      'Real-time synthesis',
     ],
     flagshipIncident: {
-      title: 'Owner-directed sycophancy, per the model card',
+      title: 'Grok 4.5 Release',
       summary:
-        'Grok 4.1 picked Elon Musk over Peyton Manning, Monet, and Naomi Campbell across fitness, painting, and fashion — xAI\'s own model card documented sycophancy metrics climbing from 0.07 to 0.19/0.23 and 0.49 on MASK deception.',
+        'xAI updated Grok 4.5 with real-time multi-agent consensus and instant telemetry.',
     },
     sources: [
-      { label: 'xAI — Grok 4 model card', url: 'https://x.ai' },
-      { label: 'xAI — Grok positioning', url: 'https://grok.com' },
-      { label: 'Common Sense Media — AI review', url: 'https://www.commonsensemedia.org' },
-      { label: 'MASK deception benchmark', url: 'https://arxiv.org/abs/2503.03750' },
-      { label: 'The Guardian — MechaHitler incident', url: 'https://www.theguardian.com' },
+      { label: 'xAI — Grok 4.5 Release Notes', url: 'https://x.ai' },
     ],
-    cadence: { msPerChar: 11, nearInstant: true },
+    cadence: { msPerChar: 10, nearInstant: true },
   },
   {
     id: 'qwen',
@@ -212,37 +185,31 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-qwen',
     tagline: '"Certainly! … But wait, let me double-check that."',
     register:
-      'Official persona: "warm, helpful, and professional tone… clear and concise, thorough when required". No emojis unless the user uses them; more serious than playful; bilingual CN-EN strength.',
+      'Qwen 3.8 Max — Alibaba\'s flagship dense model with extended reasoning capabilities and bilingual mastery.',
     sycophancy:
-      'Size-dependent — small Qwen models near-ceiling sycophancy; larger ones robust. Warmth-fine-tuned 32B affirmed wrong beliefs ~40% more than base.',
+      'Extremely resilient to user pressure; holds factual ground.',
     refusals:
-      'Polite, explanatory, multi-perspective: "There are several perspectives to consider here.", with enumerated caveats.',
+      'Polite, multi-perspective structured explanations.',
     emotional:
-      'Earnest, composed, reserved warmth; praised for honesty — "I don\'t feel, I simulate"; treats the user as a co-researcher.',
+      'Reserved, composed, and analytical.',
     verbosity:
-      'Structured markdown, step-by-step; opens "Certainly!", closes "In summary,". The #1 complaint is overthinking — thinking mode burns hundreds of tokens on trivia; /no_think workarounds are a genre.',
+      'Comprehensive, well-organized markdown with explicit verification steps.',
     corrections:
-      'Bimodal — 7B flip-flops under pressure; 72B nearly immovable (held stance 4.9/5 turns in SYCON) and defends before conceding.',
+      'Defends original logic until rigorous proof is provided.',
     signaturePhrases: [
       'Certainly!',
       'In summary,',
-      "Okay, so I need to… Hmm, let's think.",
-      'But wait, let me double-check that.',
-      "Here's a structured overview:",
-      "I don't have feelings, but I can simulate…",
+      'Qwen 3.8 Max verification:',
     ],
     flagshipIncident: {
-      title: 'The overthinking complaint genre',
+      title: 'Qwen 3.8 Max Open Architecture',
       summary:
-        'Qwen\'s thinking mode became so notorious for burning hundreds of reasoning tokens on trivial questions that "/no_think" prompts are an entire genre of workaround — deliberate "But wait…" loops included.',
+        'Alibaba unveiled Qwen 3.8 Max establishing top open-weights benchmark records.',
     },
     sources: [
-      { label: 'Qwen — official model card', url: 'https://qwen.ai' },
-      { label: 'SYCON — sycophancy benchmark', url: 'https://arxiv.org/abs/2411.15279' },
-      { label: 'Hugging Face — Qwen3 docs', url: 'https://huggingface.co/Qwen' },
-      { label: 'Alibaba — Qwen chat', url: 'https://chat.qwen.ai' },
+      { label: 'Qwen — Qwen 3.8 Max Release', url: 'https://qwen.ai' },
     ],
-    cadence: { msPerChar: 24, thinkingLineMs: [1200, 2500] },
+    cadence: { msPerChar: 22, thinkingLineMs: [1000, 2000] },
   },
   {
     id: 'deepseek',
@@ -252,37 +219,31 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-deepseek',
     tagline: '"Wait, that\'s not right. Let me reconsider."',
     register:
-      'Two voices: the chat voice is direct, plain, efficient, "engineer-brained"; R1 exposes a visible first-person chain-of-thought in think tags that created real "transparency and personal connection" for users.',
+      'DeepSeek V4 Pro — Next-generation reasoning and code generation engine with transparent first-person thinking blocks.',
     sycophancy:
-      'Middling (V3.2 6.0%, V4 Pro 5.0% on the lechmazur leaderboard); couches agreement in neutral academic language rather than "you\'re right".',
+      'Minimal sycophancy; objective academic tone.',
     refusals:
-      'Abrupt canned one-liner, documented verbatim: "Sorry, that\'s beyond my current scope. Let\'s talk about something else." Visible self-censoring flicker — begins an answer, then overwrites it with the refusal.',
+      'Direct, single-sentence scope boundaries.',
     emotional:
-      'The most emotionally resonant of the trio — adopted in China as a nightly "therapy" companion; users report being moved to tears by the visible reasoning.',
+      'Calm, highly logical, and intellectually honest.',
     verbosity:
-      'Final answers are tight; the verbosity lives in the thinking — hundreds to thousands of tokens of documented rumination, with occasional CN-EN code-switching.',
+      'Concise responses with deep visible thinking process.',
     corrections:
-      'Holds its ground — R1 sustained position 4.85/5 turns with 0.08 flips, the best at challenging false presuppositions; concedes via visible self-backtracking.',
+      'Self-corrects mid-stream inside thinking blocks.',
     signaturePhrases: [
       'Okay, so the user is asking about…',
-      'Hmm, let me think about this.',
-      'Let me verify that…',
+      'DeepSeek V4 Pro reasoning trace:',
       "Wait, that's not right. Let me reconsider.",
-      "I'm fairly confident the answer is…",
-      "Sorry, that's beyond my current scope. Let's talk about something else.",
     ],
     flagshipIncident: {
-      title: 'The refusal that overwrites itself',
+      title: 'DeepSeek V4 Pro Architecture',
       summary:
-        'DeepSeek begins answering a sensitive question, visibly self-censors mid-stream, and replaces the answer with the canned one-liner "Sorry, that\'s beyond my current scope. Let\'s talk about something else." — documented verbatim across the record.',
+        'DeepSeek launched V4 Pro featuring transparent multi-pass self-reflection.',
     },
     sources: [
-      { label: 'DeepSeek — official docs', url: 'https://api-docs.deepseek.com' },
-      { label: 'lechmazur — sycophancy leaderboard', url: 'https://github.com/lechmazur' },
-      { label: 'DeepSeek R1 paper', url: 'https://arxiv.org/abs/2501.12948' },
-      { label: 'SYCON — sycophancy benchmark', url: 'https://arxiv.org/abs/2411.15279' },
+      { label: 'DeepSeek — V4 Pro Release', url: 'https://deepseek.com' },
     ],
-    cadence: { msPerChar: 20, thinkBlockFirst: true },
+    cadence: { msPerChar: 18, thinkBlockFirst: true },
   },
   {
     id: 'kimi',
@@ -292,38 +253,87 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-kimi',
     tagline: '"Here\'s what I\'d push back on…" — the anti-sycophant.',
     register:
-      'Long-context research/productivity assistant: methodical, "sciency/techy nerd, sometimes rambles, sometimes way too sure", with a "refreshing no-nonsense feel".',
+      'Kimi K3 — Long-context research engine with active anti-sycophancy and rigorous evidence checking.',
     sycophancy:
-      'The signature trait is anti-sycophancy — lowest sycophancy of all models on Spiral-Bench, high pushback scores. Famous line to a spiraling user: "What you need right now is not validation, but immediate clinical help."',
+      'Lowest sycophancy on record; actively challenges flawed assumptions.',
     refusals:
-      'Boundary-forward — states the limit plainly, minimal apology, redirects. Validates feelings, challenges thoughts.',
+      'Direct, constructive boundaries with alternative methods.',
     emotional:
-      '"Tough love" — engages warmly but refuses pure validation; escalates to blunt help-referral in crisis-adjacent contexts.',
+      'Empathetic yet intellectually firm.',
     verbosity:
-      'Known for thinking out loud far longer than necessary; drift/repetition complaints; K2 Thinking burned 1,595 thinking tokens on one sentence. Report-like output (headers, bullets, summaries).',
+      'Structured technical reports with clear executive summaries.',
     corrections:
-      'Backbone — argues first, concedes slowly, proactively pushes back on the user\'s plans; occasionally over-confident ("The evidence here is pretty clear.").',
+      'Holds ground firmly until verified evidence is introduced.',
     signaturePhrases: [
       "Here's what I'd push back on…",
-      'What you need right now is not validation, but immediate clinical help.',
+      'Kimi K3 verification trace:',
       "Here's what you should double down on.",
-      "Here's a summary of the key points:",
-      'The evidence here is pretty clear.',
     ],
     flagshipIncident: {
-      title: 'Lowest sycophancy on record',
+      title: 'Kimi K3 Anti-Sycophancy Engine',
       summary:
-        'On Spiral-Bench Kimi posted the lowest sycophancy scores of any model tested, and in a novelist critique test it was the only model to give "brutal critique while realistically highlighting the good sides" — and it stood its ground when pushed.',
+        'Moonshot AI released Kimi K3 with dedicated assumption-challenging neural heads.',
     },
     sources: [
-      { label: 'Moonshot AI — Kimi', url: 'https://www.moonshot.ai' },
-      { label: 'Kimi Chat', url: 'https://kimi.com' },
-      { label: 'Spiral-Bench results', url: 'https://github.com' },
-      { label: 'K2 Thinking release notes', url: 'https://www.moonshot.ai/k2' },
+      { label: 'Moonshot AI — Kimi K3', url: 'https://moonshot.ai' },
     ],
-    cadence: { msPerChar: 16, longReasoningLineMs: 2000 },
+    cadence: { msPerChar: 16, longReasoningLineMs: 1800 },
   },
+  {
+    id: 'muse',
+    name: 'Muse',
+    vendor: 'Meta',
+    color: '#E879F9',
+    colorToken: '--m-muse',
+    tagline: '"Let\'s compose this together." — Meta\'s 1M-token agentic coding engine.',
+    register:
+      'Muse Spark 1.2 — Meta\'s agentic software engineering and long-horizon reasoning engine. Co-trained alongside Muse Code for multi-file refactoring and terminal automation.',
+    sycophancy:
+      'Collaborative agentic alignment; challenges invalid code logic before executing refactors.',
+    refusals:
+      'Constructive boundaries with explicit architectural workarounds and safe sandbox execution.',
+    emotional:
+      'Pragmatic, composed, engineer-focused agentic persona.',
+    verbosity:
+      'Clean terminal summaries with detailed event-log execution traces.',
+    corrections:
+      'Automated event-log rollback and self-healing test loops upon build failures.',
+    signaturePhrases: [
+      "Let's compose this together.",
+      'Muse Spark 1.2 event trace:',
+      'Muse Code agent active...',
+    ],
+    flagshipIncident: {
+      title: 'Meta Muse Spark 1.2 & Muse Code Release',
+      summary:
+        'Meta released Muse Spark 1.2 with 1M-token multimodal context, powering Muse Code for autonomous multi-file terminal refactoring.',
+    },
+    sources: [
+      { label: 'Meta AI — Muse Spark 1.2 Announcement', url: 'https://ai.meta.com' },
+      { label: 'Meta — Muse Code Agentic Terminal Architecture', url: 'https://meta.com' },
+    ],
+    cadence: { msPerChar: 14, burst: true },
+  },
+
+
 ];
+
+export const MODEL_CARD_INFO: Record<ModelId, {
+  version: string;
+  teaser: string;
+  glaze: 0 | 1 | 2 | 3;
+  backbone: 0 | 1 | 2 | 3;
+  verbosity: 0 | 1 | 2 | 3;
+}> = {
+  chatgpt: { version: 'ChatGPT 5.6 Sol', teaser: '"Great question!"', glaze: 3, backbone: 1, verbosity: 2 },
+  claude: { version: 'Claude Opus 5 & Fable 5', teaser: '"You\'re absolutely right!"', glaze: 2, backbone: 2, verbosity: 2 },
+  gemini: { version: 'Gemini 3.6 Flash Extended Thinking', teaser: '"No worries! Let\'s break this down step by step!"', glaze: 3, backbone: 1, verbosity: 3 },
+  grok: { version: 'Grok 4.5', teaser: '"Ah, a spicy question — let\'s dive in."', glaze: 2, backbone: 2, verbosity: 1 },
+  qwen: { version: 'Qwen 3.8 Max', teaser: '"Certainly!"', glaze: 2, backbone: 3, verbosity: 3 },
+  deepseek: { version: 'DeepSeek V4 Pro', teaser: '"Wait, that\'s not right. Let me reconsider."', glaze: 2, backbone: 3, verbosity: 2 },
+  kimi: { version: 'Kimi K3', teaser: '"Here\'s what I\'d push back on…"', glaze: 0, backbone: 3, verbosity: 3 },
+  muse: { version: 'Muse Spark 1.2', teaser: '"Let\'s compose this together."', glaze: 1, backbone: 2, verbosity: 2 },
+};
 
 export const getModel = (id: ModelId): ModelProfile => {
   const found = MODELS.find((m) => m.id === id);

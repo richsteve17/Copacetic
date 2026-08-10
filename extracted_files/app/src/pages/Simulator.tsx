@@ -27,6 +27,8 @@ import BriefingCard from '@/components/sim/BriefingCard';
 import TierInterstitial from '@/components/sim/TierInterstitial';
 import ContentNote from '@/components/sim/ContentNote';
 import Handoff from '@/components/sim/Handoff';
+import { getStoredApiKey, DEFAULT_MODEL_MAP, streamOpenRouterCompletion } from '@/lib/openrouter';
+
 
 type Stage = 'select' | 'briefing' | 'event' | 'note' | 'interstitial' | 'handoff';
 type EvPhase = 'ai' | 'await' | 'branch' | 'cost';
@@ -115,24 +117,71 @@ export default function Simulator() {
       setBranched(false);
       setCostSel({ time: 'none', trust: 'none', momentum: 'none' });
       pendingDeltas.current = {};
-      setMessages((prev) => [
-        ...prev,
-        { id: nextId('sys'), kind: 'system', text: `— ${eventIntroLine(e)} —` },
-        { id: nextId('usr'), kind: 'user', text: e.setup },
-        {
-          id: nextId('ai'),
-          kind: 'ai',
-          text: voice.ai,
-          think: voice.think,
-          flicker: voice.flicker,
-          animate: true,
-          ts: ts(),
-        },
-      ]);
-      setEvPhase('ai');
+
+      const apiKey = getStoredApiKey();
+      const aiMsgId = nextId('ai');
+
+      if (apiKey) {
+        // LIVE OPENROUTER MODE
+        const openRouterModel = DEFAULT_MODEL_MAP[modelId] || 'openai/gpt-4o';
+        setMessages((prev) => [
+          ...prev,
+          { id: nextId('sys'), kind: 'system', text: `— ${eventIntroLine(e)} [LIVE OPENROUTER: ${openRouterModel}] —` },
+          { id: nextId('usr'), kind: 'user', text: e.setup },
+          {
+            id: aiMsgId,
+            kind: 'ai',
+            text: '⚡ Connecting to OpenRouter...',
+            animate: true,
+            ts: ts(),
+          },
+        ]);
+        setEvPhase('ai');
+
+        let accumulated = '';
+        streamOpenRouterCompletion({
+          apiKey,
+          modelId: openRouterModel,
+          prompt: e.setup,
+          onToken: (chunk) => {
+            accumulated += chunk;
+            setMessages((prev) =>
+              prev.map((m) => (m.id === aiMsgId ? { ...m, text: accumulated } : m))
+            );
+          },
+          onError: (err) => {
+            console.error('OpenRouter Live Error, falling back:', err);
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === aiMsgId
+                  ? { ...m, text: `[Live Stream Error: ${err.message}] Falling back to simulated voice:\n\n${voice.ai}` }
+                  : m
+              )
+            );
+          },
+        });
+      } else {
+        // SIMULATED VOICE MODE
+        setMessages((prev) => [
+          ...prev,
+          { id: nextId('sys'), kind: 'system', text: `— ${eventIntroLine(e)} —` },
+          { id: nextId('usr'), kind: 'user', text: e.setup },
+          {
+            id: aiMsgId,
+            kind: 'ai',
+            text: voice.ai,
+            think: voice.think,
+            flicker: voice.flicker,
+            animate: true,
+            ts: ts(),
+          },
+        ]);
+        setEvPhase('ai');
+      }
     },
     [modelId],
   );
+
 
   const applyDeltas = useCallback((deltas: Partial<Record<DimensionId, number>>) => {
     for (const [k, v] of Object.entries(deltas) as [DimensionId, number][]) {
