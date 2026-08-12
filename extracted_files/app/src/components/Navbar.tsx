@@ -214,9 +214,15 @@ export default function Navbar() {
                 {loadingModels ? (
                   <p className="text-xs font-mono text-ink-low animate-pulse">Fetching live OpenRouter models...</p>
                 ) : availableModels.length > 0 ? (
-                  <p className="text-xs font-mono text-emerald-400">
-                    ✓ Connected & synced {availableModels.length} models live from OpenRouter.ai
-                  </p>
+                  liveEnabled ? (
+                    <p className="text-xs font-mono text-emerald-400">
+                      ✓ Connected &amp; active with OpenRouter API Key ({availableModels.length} models available)
+                    </p>
+                  ) : (
+                    <p className="text-xs font-mono text-amber-400/90">
+                      ⚡ OpenRouter model catalog synced ({availableModels.length} models) &middot; Enter API key above for live inference
+                    </p>
+                  )
                 ) : null}
 
                 <div className="flex justify-end pt-2">

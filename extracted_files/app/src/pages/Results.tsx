@@ -11,6 +11,7 @@ import DimensionBreakdown from '@/components/results/DimensionBreakdown';
 import CopyBlock, { downloadText } from '@/components/results/CopyBlock';
 import CostLedger from '@/components/results/CostLedger';
 import CompareTable from '@/components/results/CompareTable';
+import ReceiptsCard from '@/components/results/ReceiptsCard';
 import ResultsParticles from '@/components/results/ResultsParticles';
 import EmptyState from '@/components/results/EmptyState';
 import { useRuns } from '@/state/runs';
@@ -398,17 +399,22 @@ export default function Results() {
         </div>
       </section>
 
-      {/* ===== Section 5 — cost ledger + compare ===== */}
-      <section className="mx-auto max-w-container px-[clamp(20px,4vw,48px)] py-[clamp(64px,10vh,110px)]">
-        <SectionLabel index="04" title="WHAT IT COST — AND HOW YOU COMPARE" className="mb-12" />
-        <div className="grid gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <CostLedger run={selected} />
-          </div>
-          <div className="lg:col-span-7">
-            <CompareTable runs={runs} activeModel={selected.modelId} />
+      {/* ===== Section 5 — cost ledger + compare + receipts verification ===== */}
+      <section className="mx-auto max-w-container px-[clamp(20px,4vw,48px)] py-[clamp(64px,10vh,110px)] space-y-12">
+        <div>
+          <SectionLabel index="04" title="WHAT IT COST — AND HOW YOU COMPARE" className="mb-12" />
+          <div className="grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <CostLedger run={selected} />
+            </div>
+            <div className="lg:col-span-7">
+              <CompareTable runs={runs} activeModel={selected.modelId} />
+            </div>
           </div>
         </div>
+
+        {/* Researcher Verification Audit Receipts */}
+        <ReceiptsCard run={selected} />
       </section>
 
       {/* ===== Section 6 — footer CTAs ===== */}

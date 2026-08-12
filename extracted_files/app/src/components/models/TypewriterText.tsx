@@ -27,13 +27,14 @@ interface TypewriterTextProps {
  */
 export default function TypewriterText({
   profile,
-  text,
+  text: rawText,
   active,
   nonce = 0,
   thinkingLabel,
   className,
   onDone,
 }: TypewriterTextProps) {
+  const text = rawText || '';
   const [len, setLen] = useState(0);
   const [thinking, setThinking] = useState(false);
   const [cursorOn, setCursorOn] = useState(false);
