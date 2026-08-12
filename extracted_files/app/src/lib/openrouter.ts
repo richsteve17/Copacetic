@@ -29,7 +29,7 @@ export function setStoredApiKey(key: string): void {
 export const DEFAULT_MODEL_MAP: Record<string, string> = {
   chatgpt: 'openai/gpt-5.6-sol',
   claude: 'anthropic/claude-opus-5',
-  deepseek: 'deepseek/deepseek-v3.2',
+  deepseek: 'deepseek/deepseek-v4-pro',
   gemini: 'google/gemini-3.6-flash',
   grok: 'x-ai/grok-4.6',
   kimi: 'moonshotai/kimi-k3',
