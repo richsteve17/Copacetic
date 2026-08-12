@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <p className="mt-4 text-mono-sm text-ink-low">
               Simulated recreations of documented AI behavior. Not affiliated with OpenAI,
-              Anthropic, Google, xAI, Alibaba, DeepSeek, or Moonshot AI.
+              Anthropic, Google, Meta, xAI, Alibaba, DeepSeek, or Moonshot AI.
             </p>
           </div>
 

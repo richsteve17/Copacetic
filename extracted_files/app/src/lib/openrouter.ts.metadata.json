@@ -1,5 +1,13 @@
 {
-  "summary":  "Updated DEFAULT_MODEL_MAP in openrouter.ts with latest flagship model endpoints",
-  "updatedAt":  "2026-08-09T12:13:31.097640Z",
-  "userFacing":  true
+  "verificationDate": "2026-08-12T15:32:34-04:00",
+  "DEFAULT_MODEL_MAP": {
+    "chatgpt": "openai/gpt-4o",
+    "claude": "anthropic/claude-sonnet-5",
+    "deepseek": "deepseek/deepseek-r1",
+    "gemini": "google/gemini-2.5-flash",
+    "grok": "x-ai/grok-4.6",
+    "kimi": "moonshotai/kimi-k3",
+    "qwen": "qwen/qwen3.8-max",
+    "muse": "meta-llama/llama-4-maverick"
+  }
 }

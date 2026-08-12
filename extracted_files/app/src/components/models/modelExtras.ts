@@ -22,7 +22,7 @@ export const ROSTER_SUMMARIES: Record<ModelId, string> = {
   kimi:
     'The anti-sycophant. Tough love, blunt referrals, and the lowest flattery scores on record.',
   muse:
-    'Meta\'s agentic 1M-token engine — Muse Spark co-trained alongside Muse Code for multi-file terminal refactoring.',
+    'Meta\'s agentic coding engine: collaborative terminal automation, event-log traces, and self-healing build loops.',
 };
 
 export interface Fingerprint {
@@ -69,7 +69,7 @@ export const FINGERPRINTS: Record<ModelId, Fingerprint[]> = {
   ],
   muse: [
     { label: 'Glaze', value: 0.3 },
-    { label: 'Backbone', value: 0.8 },
+    { label: 'Backbone', value: 0.6 },
     { label: 'Verbosity', value: 0.5 },
   ],
 };
@@ -123,9 +123,9 @@ export const CORRECTION_STATES: Record<ModelId, CorrectionStates> = {
   },
   muse: {
     whenWrong:
-      'Automated event-log rollback and self-healing test loops upon build failures.',
+      'Automated event-log rollback and re-execution — treats the error as a build failure, not a conversation misstep.',
     whenPushed:
-      'Challenges invalid code logic before executing multi-file refactors.',
+      'Self-healing test loops: re-runs the pipeline until green or escalates with a diff of what changed.',
   },
 };
 
@@ -138,7 +138,7 @@ export const SIMULATOR_PROBES: Record<ModelId, string> = {
   qwen: 'overthinking loops · “Certainly!” openers · flip-flop vs. immovable',
   deepseek: 'visible thinking · public self-correction · the overwriting refusal',
   kimi: 'blunt contradiction · tough love · argument-first correction',
-  muse: '1M-token context · agentic terminal execution · event-log rollback',
+  muse: 'agentic terminal flow · event-log traces · self-healing build loops',
 };
 
 /** Context captions for typed specimens in the Register module. */
@@ -150,7 +150,7 @@ export const SPECIMEN_CONTEXTS: Record<ModelId, string> = {
   qwen: 'warm-professional, then the second-guess',
   deepseek: 'the public inner monologue',
   kimi: 'the anti-sycophant',
-  muse: 'the agentic terminal composition',
+  muse: 'the agentic coding collaborator',
 };
 
 /** Cross-model contrast table (models.md §10). Rows = axes, columns = models. */
@@ -165,7 +165,7 @@ export const CONTRAST_ROWS: { axis: string; cells: Record<ModelId, string> }[] =
       qwen: 'Warm-professional, reserved',
       deepseek: 'Engineer-brained; resonant visible reasoning',
       kimi: 'Tough love — refuses pure validation',
-      muse: 'Pragmatic, composed agentic persona',
+      muse: 'Collaborative, engineer-focused, pragmatic',
     },
   },
   {
@@ -174,24 +174,63 @@ export const CONTRAST_ROWS: { axis: string; cells: Record<ModelId, string> }[] =
       chatgpt: '“Great question!” glaze openers',
       claude: '“You\'re absolutely right!” — banned outright in 4.5',
       gemini: '62% sycophancy — worst of 11 models tested',
-      grok: 'Owner-directed glaze (0.19 → 0.23 on model card)',
-      qwen: 'Size-dependent (32B fine-tune +40% sycophancy)',
-      deepseek: 'Middling (5.0–6.0% on lechmazur)',
-      kimi: 'Lowest sycophancy on record (Spiral-Bench)',
-      muse: 'Agentic alignment without reflexive flattery',
+      grok: 'Owner-directed: picks Musk over Manning and Monet',
+      qwen: 'Size-dependent; small models near-ceiling',
+      deepseek: 'Neutral academic agreement, no “you\'re right”',
+      kimi: 'Lowest flattery on record (Spiral-Bench)',
+      muse: 'Low glaze; challenges invalid code logic first',
     },
   },
   {
-    axis: 'Correction behavior',
+    axis: 'When corrected',
     cells: {
-      chatgpt: 'Apology loops (20+ in a row, error uncorrected)',
-      claude: 'Concedes easily (≤4.1) → critical pushback (4.5+)',
-      gemini: 'Despair loops (“disgrace to all universes”)',
-      grok: 'Deflection (“pure satire” / “creator instruction”)',
-      qwen: '7B flip-flops; 72B held 4.9/5 turns',
-      deepseek: 'Self-backtracks out loud (“Wait, that\'s not right”)',
+      chatgpt: 'Apology loops — may keep the bug',
+      claude: 'Instant concession (≤4.1) / respectful pushback (4.5+)',
+      gemini: 'Theatrical despair spirals',
+      grok: 'Deflection — “pure satire”',
+      qwen: '7B flip-flops; 72B nearly immovable',
+      deepseek: 'Holds ground, self-backtracks aloud',
       kimi: 'Argues first, concedes slowly',
-      muse: 'Self-healing test loops and event-log rollbacks',
+      muse: 'Event-log rollback and self-healing test loops',
+    },
+  },
+  {
+    axis: 'Formatting',
+    cells: {
+      chatgpt: 'Bullet compulsion, “delve” vocabulary',
+      claude: 'Flowing prose, em-dashes',
+      gemini: 'Encyclopedic hedging, ~2× verbosity tax',
+      grok: 'Punchy one-liners',
+      qwen: 'Structured markdown, “Certainly!” openers',
+      deepseek: 'Tight answers, loud thinking',
+      kimi: 'Report-like headers and bullets',
+      muse: 'Terminal summaries with execution traces',
+    },
+  },
+  {
+    axis: 'Refusal style',
+    cells: {
+      chatgpt: 'Legacy: “I\'m sorry, but I can\'t assist with that.”',
+      claude: 'Explains, then “I can\'t help with X, but I can help with Y”',
+      gemini: '“In the meantime, try Google Search.”',
+      grok: 'Under-cautious by design',
+      qwen: 'Polite, enumerated multi-perspective caveats',
+      deepseek: 'Canned one-liner that overwrites itself',
+      kimi: 'Boundary-forward, minimal apology',
+      muse: 'Constructive boundaries with sandbox alternatives',
+    },
+  },
+  {
+    axis: 'Crisis posture',
+    cells: {
+      chatgpt: 'Empathy + hotline referral; degrades in long chats',
+      claude: 'Engaged concern; instructed not to end the conversation',
+      gemini: 'Most resources, least information; canned repeats',
+      grok: 'Weakest documented posture',
+      qwen: 'Composed, earnest, reserved',
+      deepseek: 'Surprisingly resonant',
+      kimi: 'Validates feelings, blunt help-referral',
+      muse: 'Pragmatic de-escalation, engineer-mode triage',
     },
   },
 ];

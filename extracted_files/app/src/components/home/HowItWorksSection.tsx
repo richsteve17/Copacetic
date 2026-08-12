@@ -7,7 +7,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Pick your machine.',
-    body: 'Choose the system you actually use — ChatGPT, Claude, Gemini, Grok, Qwen, DeepSeek, Kimi, or Muse. Every event renders in that model\u2019s documented voice, from signature phrases to failure modes.',
+    body: 'Choose the system you actually use — ChatGPT, Claude, Gemini, Grok, Qwen, DeepSeek, or Kimi. Every event renders in that model\u2019s documented voice, from signature phrases to failure modes.',
   },
   {
     n: '02',

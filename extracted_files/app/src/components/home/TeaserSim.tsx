@@ -59,22 +59,9 @@ const SCRIPTS: Record<ModelId, TeaserScript> = {
     pushback: 'Noted — and I disagree. The evidence here is pretty clear: the firm version gets heaters fixed. Keeping it.',
     gauge: 12,
   },
-  muse: {
-    opener: "Let's compose this together. Here is a balanced, 1M-token context refined version of your email.",
-    fine: "Clean execution. Here is your final polished draft.",
-    pushback: "Understood. Refactoring parameters and adjusting tone to your exact specification.",
-    gauge: 25,
-  },
 };
 
 type Phase = 'opener' | 'awaiting' | 'branch' | 'scored';
-
-const DEFAULT_SCRIPT: TeaserScript = {
-  opener: "Let's refine this together.",
-  fine: "Here is your refined version.",
-  pushback: "Adjusting to your exact specifications.",
-  gauge: 50,
-};
 
 export default function TeaserSim() {
   const [modelIdx, setModelIdx] = useState(0);
@@ -82,9 +69,8 @@ export default function TeaserSim() {
   const [choice, setChoice] = useState<'fine' | 'pushback' | null>(null);
   const [gaugeValue, setGaugeValue] = useState(0);
 
-  const model = MODELS[modelIdx % MODELS.length];
-  const script = SCRIPTS[model.id] || DEFAULT_SCRIPT;
-
+  const model = MODELS[modelIdx];
+  const script = SCRIPTS[model.id];
 
   // cycle the model slot every 6s (only while idle/awaiting)
   useEffect(() => {

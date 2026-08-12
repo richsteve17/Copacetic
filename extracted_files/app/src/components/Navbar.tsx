@@ -142,7 +142,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-void/85 px-4 backdrop-blur-md"
             onClick={() => setLiveModalOpen(false)}
           >
             <motion.div
@@ -150,7 +150,7 @@ export default function Navbar() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg rounded-2xl border border-line-hair bg-surface-1 p-6 shadow-2xl backdrop-blur-xl"
+              className="w-full max-w-lg rounded-2xl border border-line-hair bg-surface-1/95 p-6 shadow-2xl backdrop-blur-xl"
             >
               <div className="flex items-center justify-between border-b border-line-hair pb-4">
                 <div className="flex items-center gap-2.5">
@@ -197,7 +197,7 @@ export default function Navbar() {
                   )}
                 </div>
 
-                <div className="rounded-xl border border-line-hair bg-black/50 p-4 space-y-2.5">
+                <div className="rounded-xl border border-line-hair bg-void/50 p-4 space-y-2.5">
                   <h4 className="font-mono text-xs font-semibold text-ink-hi uppercase tracking-wider">
                     Model API Map & Endpoints
                   </h4>

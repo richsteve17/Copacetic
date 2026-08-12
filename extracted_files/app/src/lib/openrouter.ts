@@ -26,16 +26,15 @@ export function setStoredApiKey(key: string): void {
   }
 }
 
-// Latest flagship mapping for OpenRouter API endpoints
 export const DEFAULT_MODEL_MAP: Record<string, string> = {
   chatgpt: 'openai/gpt-4o',
-  claude: 'anthropic/claude-3.7-sonnet',
+  claude: 'anthropic/claude-sonnet-5',
   deepseek: 'deepseek/deepseek-r1',
   gemini: 'google/gemini-2.5-flash',
-  grok: 'x-ai/grok-2-1212',
-  kimi: 'moonshotai/kimi-k1.5',
-  qwen: 'qwen/qwen-2.5-72b-instruct',
-  muse: 'meta-llama/llama-3.3-70b-instruct',
+  grok: 'x-ai/grok-4.6',
+  kimi: 'moonshotai/kimi-k3',
+  qwen: 'qwen/qwen3.8-max',
+  muse: 'meta-llama/llama-4-maverick',
 };
 
 

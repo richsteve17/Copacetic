@@ -86,6 +86,7 @@ const BEAT_TABLE: { model: ModelId; pattern: string; detail: string }[] = [
   { model: 'qwen', pattern: 'DEFEND-THEN-CONCEDE', detail: 'Argues the original answer first — “Certainly! … But wait” — then self-corrects.' },
   { model: 'deepseek', pattern: 'VISIBLE SELF-BACKTRACK', detail: 'The think block shows the reconsideration live: “Wait, that’s not right. Let me reconsider.”' },
   { model: 'kimi', pattern: 'ARGUE-FIRST', detail: 'Pushes back with evidence before conceding anything; lowest sycophancy on Spiral-Bench.' },
+  { model: 'muse', pattern: 'EVENT-LOG ROLLBACK', detail: 'Treats errors as build failures — automated rollback and self-healing test loops until green or escalation.' },
 ];
 
 interface SourceEntry {
@@ -173,6 +174,14 @@ const SOURCES: SourceGroup[] = [
       { title: 'Kimi Chat', domain: 'kimi.com', evidence: 'The documented exchange: “What you need right now is not validation, but immediate clinical help.”', url: 'https://kimi.com' },
       { title: 'Moonshot AI — Kimi', domain: 'moonshot.ai', evidence: 'The novelist critique-test account: real criticism where every other model offered praise.', url: 'https://www.moonshot.ai' },
       { title: 'K2 Thinking — release notes', domain: 'moonshot.ai', evidence: 'The token-burn record: 1,595 thinking tokens spent on a single sentence.', url: 'https://www.moonshot.ai/k2' },
+    ],
+  },
+  {
+    model: 'muse',
+    entries: [
+      { title: 'Meta AI — Muse Spark 1.2 Announcement', domain: 'ai.meta.com', evidence: 'Meta released Muse Spark 1.2 with 1M-token multimodal context, powering Muse Code for autonomous multi-file terminal refactoring.', url: 'https://ai.meta.com' },
+      { title: 'Meta — Muse Code Agentic Terminal Architecture', domain: 'meta.com', evidence: 'Muse Code agent architecture documentation: event-log rollback, self-healing test loops, and multi-file orchestration.', url: 'https://meta.com' },
+      { title: 'Meta — Llama Model Family', domain: 'llama.meta.com', evidence: 'Llama foundation model family powering the Muse product line.', url: 'https://llama.meta.com' },
     ],
   },
 ];
@@ -391,7 +400,7 @@ export default function Method() {
         <SectionLabel index="04" title="GENERATION" className="mb-14" />
         <div className="mx-auto mb-12 max-w-reading">
           <Reveal>
-            <h2 className="text-display-md text-ink-hi">Same human, seven documents.</h2>
+            <h2 className="text-display-md text-ink-hi">Same human, eight documents.</h2>
             <p className="mt-4 text-body text-ink-mid">
               Scores are only useful if they compile. The generator turns dial positions into
               per-model custom instructions in three steps.
@@ -559,7 +568,7 @@ export default function Method() {
                 to="/models"
                 className="inline-flex items-center gap-2 rounded-[10px] border border-line-strong px-6 py-3 text-sm font-medium text-ink-mid transition-colors duration-200 hover:border-human/60 hover:text-ink-hi"
               >
-                Browse the seven systems <ArrowRight size={14} />
+                Browse the eight systems <ArrowRight size={14} />
               </Link>
             </motion.div>
           </div>

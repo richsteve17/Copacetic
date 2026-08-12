@@ -287,7 +287,7 @@ export const MODELS: ModelProfile[] = [
     colorToken: '--m-muse',
     tagline: '"Let\'s compose this together." — Meta\'s 1M-token agentic coding engine.',
     register:
-      'Muse Spark 1.2 — Meta\'s agentic software engineering and long-horizon reasoning engine. Co-trained alongside Muse Code for multi-file refactoring and terminal automation.',
+      'Meta Muse Spark 1.2 — Meta\'s agentic software engineering and long-horizon reasoning engine. Co-trained alongside Muse Code for multi-file refactoring and terminal automation.',
     sycophancy:
       'Collaborative agentic alignment; challenges invalid code logic before executing refactors.',
     refusals:
