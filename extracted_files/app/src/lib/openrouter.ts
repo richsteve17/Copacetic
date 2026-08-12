@@ -27,14 +27,14 @@ export function setStoredApiKey(key: string): void {
 }
 
 export const DEFAULT_MODEL_MAP: Record<string, string> = {
-  chatgpt: 'openai/gpt-4o',
-  claude: 'anthropic/claude-sonnet-5',
-  deepseek: 'deepseek/deepseek-r1',
+  chatgpt: 'openai/gpt-5.6-sol',
+  claude: 'anthropic/claude-opus-5',
+  deepseek: 'deepseek/deepseek-v3.2',
   gemini: 'google/gemini-2.5-flash',
   grok: 'x-ai/grok-4.6',
   kimi: 'moonshotai/kimi-k3',
   qwen: 'qwen/qwen3.8-max',
-  muse: 'meta-llama/llama-4-maverick',
+  muse: 'meta-llama/llama-3.3-70b-instruct',
 };
 
 

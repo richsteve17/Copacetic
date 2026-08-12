@@ -73,7 +73,7 @@ export default function Connect() {
     setTestLatency(null);
     const startTime = Date.now();
 
-    const targetEndpoint = DEFAULT_MODEL_MAP[testModel] || 'openai/gpt-4o';
+    const targetEndpoint = DEFAULT_MODEL_MAP[testModel] || testModel || 'openai/gpt-5.6-sol';
 
     try {
       await streamOpenRouterCompletion({
@@ -329,7 +329,7 @@ export default function Connect() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {MODELS.map((m) => {
-              const endpoint = DEFAULT_MODEL_MAP[m.id] || 'openai/gpt-4o';
+              const endpoint = DEFAULT_MODEL_MAP[m.id] || 'openai/gpt-5.6-sol';
               return (
                 <div
                   key={m.id}
