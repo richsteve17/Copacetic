@@ -34,7 +34,7 @@ export const DEFAULT_MODEL_MAP: Record<string, string> = {
   grok: 'x-ai/grok-4.6',
   kimi: 'moonshotai/kimi-k3',
   qwen: 'qwen/qwen3.8-max',
-  muse: 'meta-llama/llama-3.3-70b-instruct',
+  muse: 'meta/muse-spark-1.2',
 };
 
 
