@@ -7,6 +7,7 @@ import Simulator from './pages/Simulator';
 import Models from './pages/Models';
 import Results from './pages/Results';
 import Method from './pages/Method';
+import Connect from './pages/Connect';
 
 class GlobalErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean; error: any }> {
   state = { hasError: false, error: null };
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="models" element={<Models />} />
             <Route path="results" element={<Results />} />
             <Route path="method" element={<Method />} />
+            <Route path="connect" element={<Connect />} />
           </Route>
         </Routes>
       </RunsProvider>

@@ -28,6 +28,7 @@ export default function Footer() {
               <li><Link className="text-ink-mid transition-colors hover:text-ink-hi" to="/models">Model Profiles</Link></li>
               <li><Link className="text-ink-mid transition-colors hover:text-ink-hi" to="/results">Results</Link></li>
               <li><Link className="text-ink-mid transition-colors hover:text-ink-hi" to="/method">Method &amp; Sources</Link></li>
+              <li><Link className="text-ink-mid transition-colors hover:text-ink-hi" to="/connect">Connect API</Link></li>
             </ul>
           </div>
 

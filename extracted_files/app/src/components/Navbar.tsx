@@ -1,67 +1,35 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, Key, Zap, Check } from 'lucide-react';
+import { Menu, X, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-import {
-  getStoredApiKey,
-  setStoredApiKey,
-  DEFAULT_MODEL_MAP,
-  fetchOpenRouterModels,
-  type OpenRouterModel,
-} from '@/lib/openrouter';
+import { getStoredApiKey } from '@/lib/openrouter';
 
 const LINKS = [
   { to: '/simulator', label: 'Simulator' },
   { to: '/models', label: 'Model Profiles' },
   { to: '/results', label: 'Results' },
   { to: '/method', label: 'Method' },
+  { to: '/connect', label: 'Connect API' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [liveModalOpen, setLiveModalOpen] = useState(false);
-  const [apiKey, setApiKey] = useState('');
   const [liveEnabled, setLiveEnabled] = useState(false);
-  const [statusMsg, setStatusMsg] = useState('');
-  const [availableModels, setAvailableModels] = useState<OpenRouterModel[]>([]);
-  const [loadingModels, setLoadingModels] = useState(false);
 
   const location = useLocation();
   const onSimulator = location.pathname.startsWith('/simulator');
 
   useEffect(() => {
     const key = getStoredApiKey();
-    setApiKey(key);
-    setLiveEnabled(Boolean(key));
-  }, []);
-
-  const handleSaveKey = () => {
-    setStoredApiKey(apiKey);
-    if (apiKey.trim()) {
-      setLiveEnabled(true);
-      setStatusMsg('API key saved! Live mode active.');
-    } else {
-      setLiveEnabled(false);
-      setStatusMsg('API key cleared. Switched to Simulated mode.');
-    }
-    setTimeout(() => setStatusMsg(''), 3000);
-  };
-
-  const handleFetchModels = async () => {
-    setLoadingModels(true);
-    const models = await fetchOpenRouterModels();
-    setAvailableModels(models);
-    setLoadingModels(false);
-  };
+    setLiveEnabled(Boolean(key && key.trim()));
+  }, [location.pathname]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-line-hair bg-[rgba(11,11,15,0.72)] backdrop-blur-[14px]">
       <nav className="mx-auto flex h-full max-w-container items-center justify-between px-[clamp(20px,4vw,48px)]">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <img src="./assets/logo.svg" alt="COPACETIC logo" width={24} height={24} />
-
           <span className="font-mono text-sm font-bold tracking-[0.32em] text-ink-hi">COPACETIC</span>
         </Link>
 
@@ -93,13 +61,9 @@ export default function Navbar() {
             </NavLink>
           ))}
 
-          {/* OpenRouter Live Mode Button */}
-          <button
-            type="button"
-            onClick={() => {
-              setLiveModalOpen(true);
-              if (availableModels.length === 0) handleFetchModels();
-            }}
+          {/* OpenRouter Live Mode Link to /connect */}
+          <Link
+            to="/connect"
             className={cn(
               'flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-mono transition-all duration-200',
               liveEnabled
@@ -108,8 +72,8 @@ export default function Navbar() {
             )}
           >
             <Zap size={12} className={liveEnabled ? 'fill-emerald-400 text-emerald-400' : ''} />
-            <span>{liveEnabled ? 'LIVE MODE ON' : 'CONNECT OPENROUTER'}</span>
-          </button>
+            <span>{liveEnabled ? 'LIVE API ON' : 'CONNECT OPENROUTER'}</span>
+          </Link>
 
           {onSimulator ? (
             <span className="rounded-full border border-line-strong px-3.5 py-1.5 text-label text-ink-mid">
@@ -135,107 +99,41 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* OpenRouter Modal */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {liveModalOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-void/85 px-4 backdrop-blur-md"
-            onClick={() => setLiveModalOpen(false)}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-b border-line-hair bg-surface-1/95 px-6 py-6 backdrop-blur-xl md:hidden space-y-4"
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg rounded-2xl border border-line-hair bg-surface-1/95 p-6 shadow-2xl backdrop-blur-xl"
-            >
-              <div className="flex items-center justify-between border-b border-line-hair pb-4">
-                <div className="flex items-center gap-2.5">
-                  <Key size={18} className="text-human" />
-                  <h3 className="font-display text-lg text-ink-hi">OpenRouter Live Integration</h3>
-                </div>
-                <button
-                  onClick={() => setLiveModalOpen(false)}
-                  className="text-ink-low transition-colors hover:text-ink-hi"
+            <div className="flex flex-col gap-4">
+              {LINKS.map((l) => (
+                <NavLink
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      'text-base font-medium transition-colors',
+                      isActive ? 'text-human font-semibold' : 'text-ink-mid hover:text-ink-hi'
+                    )
+                  }
                 >
-                  <X size={18} />
-                </button>
-              </div>
+                  {l.label}
+                </NavLink>
+              ))}
 
-              <div className="mt-4 space-y-4">
-                <p className="text-xs leading-relaxed text-ink-mid">
-                  Connect your <span className="font-semibold text-ink-hi">OpenRouter API Key</span> to stream real-time completions live from Claude 3.7, GPT-4o, DeepSeek R1, Gemini 2.5, Grok 2, and Qwen 2.5!
-                </p>
-
-                <div>
-                  <label className="block font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-low">
-                    OpenRouter API Key
-                  </label>
-                  <div className="mt-1.5 flex gap-2">
-                    <input
-                      type="password"
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                      placeholder="sk-or-v1-..."
-                      className="flex-1 rounded-lg border border-line-hair bg-void px-3.5 py-2 font-mono text-xs text-ink-hi focus:border-human focus:outline-none"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleSaveKey}
-                      className="rounded-lg bg-human px-4 py-2 text-xs font-semibold text-void transition-colors hover:bg-human-hover"
-                    >
-                      Save Key
-                    </button>
-                  </div>
-                  {statusMsg && (
-                    <p className="mt-2 flex items-center gap-1.5 text-xs text-emerald-400 font-mono">
-                      <Check size={14} /> {statusMsg}
-                    </p>
-                  )}
-                </div>
-
-                <div className="rounded-xl border border-line-hair bg-void/50 p-4 space-y-2.5">
-                  <h4 className="font-mono text-xs font-semibold text-ink-hi uppercase tracking-wider">
-                    Model API Map & Endpoints
-                  </h4>
-                  <div className="grid grid-cols-2 gap-2 text-[0.75rem] font-mono text-ink-mid">
-                    <div>Claude: <span className="text-human">{DEFAULT_MODEL_MAP.claude}</span></div>
-                    <div>ChatGPT: <span className="text-human">{DEFAULT_MODEL_MAP.chatgpt}</span></div>
-                    <div>DeepSeek: <span className="text-human">{DEFAULT_MODEL_MAP.deepseek}</span></div>
-                    <div>Gemini: <span className="text-human">{DEFAULT_MODEL_MAP.gemini}</span></div>
-                    <div>Grok: <span className="text-human">{DEFAULT_MODEL_MAP.grok}</span></div>
-                    <div>Qwen: <span className="text-human">{DEFAULT_MODEL_MAP.qwen}</span></div>
-                  </div>
-                </div>
-
-                {loadingModels ? (
-                  <p className="text-xs font-mono text-ink-low animate-pulse">Fetching live OpenRouter models...</p>
-                ) : availableModels.length > 0 ? (
-                  liveEnabled ? (
-                    <p className="text-xs font-mono text-emerald-400">
-                      ✓ Connected &amp; active with OpenRouter API Key ({availableModels.length} models available)
-                    </p>
-                  ) : (
-                    <p className="text-xs font-mono text-amber-400/90">
-                      ⚡ OpenRouter model catalog synced ({availableModels.length} models) &middot; Enter API key above for live inference
-                    </p>
-                  )
-                ) : null}
-
-                <div className="flex justify-end pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setLiveModalOpen(false)}
-                    className="rounded-lg border border-line-strong px-4 py-2 text-xs font-medium text-ink-hi hover:border-human"
-                  >
-                    Done
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+              <Link
+                to="/connect"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 rounded-xl border border-line-hair bg-void p-3 font-mono text-xs text-ink-hi"
+              >
+                <Zap size={14} className={liveEnabled ? 'text-emerald-400 fill-emerald-400' : 'text-human'} />
+                <span>{liveEnabled ? 'Live API Active' : 'Connect OpenRouter API Key'}</span>
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
