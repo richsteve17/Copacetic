@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TeaserSim from '@/components/home/TeaserSim';
 import ParticleField from '@/components/home/ParticleField';
+import { MODELS } from '@/data/models';
+import { DIMENSIONS } from '@/data/dimensions';
+import { RUN_LENGTH } from '@/data/scenarios';
 
 class WebGLErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
@@ -140,7 +143,7 @@ export default function HeroSection() {
             transition={{ delay: 1.15, duration: 0.6 }}
             className="mt-10 text-label text-ink-low"
           >
-            7 SYSTEMS &middot; 12 EVENTS &middot; 4 TIERS &middot; 10 DIMENSIONS &middot; 0 RIGHT ANSWERS
+            {MODELS.length} SYSTEMS &middot; {RUN_LENGTH} EVENTS &middot; 4 TIERS &middot; {DIMENSIONS.length} DIMENSIONS &middot; 0 RIGHT ANSWERS
           </motion.p>
         </div>
 
@@ -153,8 +156,8 @@ export default function HeroSection() {
         >
           <TeaserSim />
           <p className="mt-4 text-mono-sm text-ink-low">
-            A taste. The full run is 12 events across 4 tiers — including the ones that go wrong at
-            the worst possible moment.
+            A taste. The full run is {RUN_LENGTH} events across 4 tiers — including the ones that go wrong
+            at the worst possible moment.
           </p>
         </motion.div>
       </div>

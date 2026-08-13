@@ -215,7 +215,7 @@ function CorrectionToggle({ profile }: { profile: ModelProfile }) {
 
 interface ProfileSectionProps {
   profile: ModelProfile;
-  /** 0-based order among the seven dossiers (drives section index + alternating side) */
+  /** 0-based order among the dossiers (drives section index + alternating side) */
   order: number;
   registerSection: (id: ModelProfile['id'], el: HTMLElement | null) => void;
 }

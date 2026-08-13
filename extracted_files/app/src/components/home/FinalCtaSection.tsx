@@ -47,7 +47,7 @@ export default function FinalCtaSection() {
             to="/models"
             className="rounded-[10px] border border-line-strong px-8 py-4 text-base font-medium text-ink-hi transition-colors hover:border-human"
           >
-            Meet the seven systems
+            Meet the eight systems
           </Link>
         </motion.div>
 
