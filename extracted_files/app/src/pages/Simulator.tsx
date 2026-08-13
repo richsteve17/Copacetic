@@ -13,6 +13,9 @@ import {
   computeCopaceticIndex,
   COST_WEIGHT,
   eventIntroLine,
+  newRunSeed,
+  resolveOptions,
+  RUN_LENGTH,
 } from '@/data/scenarios';
 import { useRuns } from '@/state/runs';
 import type { EventImpact } from '@/state/runs';
@@ -27,10 +30,13 @@ import BriefingCard from '@/components/sim/BriefingCard';
 import TierInterstitial from '@/components/sim/TierInterstitial';
 import ContentNote from '@/components/sim/ContentNote';
 import Handoff from '@/components/sim/Handoff';
-import { getStoredApiKey, DEFAULT_MODEL_MAP, streamOpenRouterCompletion } from '@/lib/openrouter';
+import { getStoredApiKey, getModelEndpoint, streamOpenRouterCompletion } from '@/lib/openrouter';
 
 
 type Stage = 'select' | 'briefing' | 'event' | 'note' | 'interstitial' | 'handoff';
+
+/** Index of the final event in a run. */
+const LAST_IDX = RUN_LENGTH - 1;
 type EvPhase = 'ai' | 'await' | 'branch' | 'cost';
 
 const ALL_SCORES = (): Record<DimensionId, number> =>
@@ -48,6 +54,7 @@ export default function Simulator() {
   const [freeTextOn, setFreeTextOn] = useState(true);
   const [skipExtreme, setSkipExtreme] = useState(false);
 
+  const [runSeed, setRunSeed] = useState(newRunSeed);
   const [eventIdx, setEventIdx] = useState(0);
   const [evPhase, setEvPhase] = useState<EvPhase>('ai');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -80,11 +87,17 @@ export default function Simulator() {
   scoresRef.current = scores;
   impactsRef.current = impacts;
 
-  const events = useMemo(() => buildRunEvents(skipExtreme), [skipExtreme]);
+  const events = useMemo(() => buildRunEvents(skipExtreme, runSeed), [skipExtreme, runSeed]);
   const model = modelId ? getModel(modelId) : null;
   const ev: ScenarioEvent | null = stage === 'event' || stage === 'note' || stage === 'interstitial'
-    ? events[Math.min(eventIdx, 11)]
+    ? events[Math.min(eventIdx, LAST_IDX)]
     : null;
+
+  /** Chips are re-resolved per model, so the same scenario reads differently per target. */
+  const options = useMemo(
+    () => (ev && modelId ? resolveOptions(ev, modelId) : []),
+    [ev, modelId],
+  );
 
   // ── deep link /simulator?model=<id> preselects a model (skips select) ──
   useEffect(() => {
@@ -123,7 +136,7 @@ export default function Simulator() {
 
       if (apiKey) {
         // LIVE OPENROUTER MODE
-        const openRouterModel = DEFAULT_MODEL_MAP[modelId] || 'openai/gpt-4o';
+        const openRouterModel = getModelEndpoint(modelId);
         setMessages((prev) => [
           ...prev,
           { id: nextId('sys'), kind: 'system', text: `— ${eventIntroLine(e)} [LIVE OPENROUTER: ${openRouterModel}] —` },
@@ -286,7 +299,7 @@ export default function Simulator() {
   const nextFromCost = useCallback(() => {
     if (evPhaseRef.current !== 'cost') return;
     const allImpacts = recordImpact();
-    if (eventIdx >= 11) {
+    if (eventIdx >= LAST_IDX) {
       finishRun(allImpacts);
     } else if (eventIdx === 2) {
       goInterstitial(2);
@@ -317,6 +330,10 @@ export default function Simulator() {
   // ── run lifecycle ──────────────────────────────────────────────────────
   const beginRun = useCallback(
     ({ freeText, skipExtreme: skip }: { freeText: boolean; skipExtreme: boolean }) => {
+      // A fresh seed each run: the scenario pools are larger than the twelve
+      // slots, so a replay draws a different script.
+      const seed = newRunSeed();
+      setRunSeed(seed);
       setFreeTextOn(freeText);
       setSkipExtreme(skip);
       setScores(ALL_SCORES());
@@ -324,7 +341,8 @@ export default function Simulator() {
       setImpacts([]);
       setMessages([]);
       setSavedRunId(null);
-      const list = buildRunEvents(skip);
+      setEventIdx(0);
+      const list = buildRunEvents(skip, seed);
       setStage('event');
       startEvent(0, list);
     },
@@ -348,6 +366,8 @@ export default function Simulator() {
   // ── keyboard: 1–4 chips, Esc exit modal (simulator.md §Interaction) ────
   const chooseRef = useRef(chooseOption);
   chooseRef.current = chooseOption;
+  const optionsRef = useRef(options);
+  optionsRef.current = options;
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -358,14 +378,15 @@ export default function Simulator() {
       const target = e.target as HTMLElement | null;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
       const n = Number(e.key);
-      if (n >= 1 && n <= 4 && ev && ev.options[n - 1]) {
+      const opts = optionsRef.current;
+      if (n >= 1 && n <= 4 && opts[n - 1]) {
         e.preventDefault();
-        chooseRef.current(ev.options[n - 1]);
+        chooseRef.current(opts[n - 1]);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [ev]);
+  }, []);
 
   // ── render ─────────────────────────────────────────────────────────────
   if (stage === 'select') {
@@ -388,7 +409,7 @@ export default function Simulator() {
 
   if (!model || !ev) return null;
 
-  const progress = impacts.length / 12;
+  const progress = impacts.length / RUN_LENGTH;
   const tier4Active = ev.tier === 4 && !skipExtreme && stage === 'event';
   const topDims = DIMENSIONS.map((d) => ({ name: d.name, value: scores[d.id] }))
     .sort((a, b) => Math.abs(b.value - BASE_SCORE) - Math.abs(a.value - BASE_SCORE))
@@ -407,7 +428,7 @@ export default function Simulator() {
       <div className="flex h-[calc(100dvh-4rem)]">
         <HudPanel
           eventN={ev.n}
-          totalEvents={12}
+          totalEvents={RUN_LENGTH}
           tier={ev.tier}
           scores={scores}
           costs={costs}
@@ -417,7 +438,7 @@ export default function Simulator() {
         <div className="flex min-w-0 flex-1 flex-col">
           <HudStrip
             eventN={ev.n}
-            totalEvents={12}
+            totalEvents={RUN_LENGTH}
             tier={ev.tier}
             showResources={tier4Active}
           />
@@ -455,13 +476,13 @@ export default function Simulator() {
                 selections={costSel}
                 onSelect={selectCost}
                 onNext={nextFromCost}
-                isLast={eventIdx >= 11}
+                isLast={eventIdx >= LAST_IDX}
               />
             ) : (
               <motion.div key={`tray-${eventIdx}`} exit={{ opacity: 0, y: 12 }}>
                 {evPhase === 'await' && (
                   <ReactionTray
-                    options={ev.options}
+                    options={options}
                     freeText={freeTextOn}
                     freeTextPlaceholder={ev.freeTextPlaceholder}
                     reflective={ev.reflective}

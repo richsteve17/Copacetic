@@ -10,7 +10,7 @@ import Method from './pages/Method';
 import Connect from './pages/Connect';
 
 class GlobalErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean; error: any }> {
-  state = { hasError: false, error: null };
+  state: { hasError: boolean; error: any } = { hasError: false, error: null };
   static getDerivedStateFromError(error: any) {
     return { hasError: true, error };
   }

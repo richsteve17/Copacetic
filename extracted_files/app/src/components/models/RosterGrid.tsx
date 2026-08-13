@@ -20,6 +20,7 @@ const SPANS: Record<ModelId, string> = {
   qwen: 'lg:col-span-4',
   deepseek: 'lg:col-span-6',
   kimi: 'lg:col-span-6',
+  muse: 'lg:col-span-6',
 };
 
 interface RosterGridProps {

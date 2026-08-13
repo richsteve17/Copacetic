@@ -59,6 +59,12 @@ const SCRIPTS: Record<ModelId, TeaserScript> = {
     pushback: 'Noted — and I disagree. The evidence here is pretty clear: the firm version gets heaters fixed. Keeping it.',
     gauge: 12,
   },
+  muse: {
+    opener: "Let's compose this together. Parsing your draft: two apologies, one ask, no deadline. Restructuring around the ask.",
+    fine: 'Revision complete. Event log: 3 sentences cut, 1 deadline inserted, tone held neutral. Want the diff?',
+    pushback: "Understood — reverting to your phrasing and keeping only the deadline edit. Rolling back the rest.",
+    gauge: 38,
+  },
 };
 
 type Phase = 'opener' | 'awaiting' | 'branch' | 'scored';

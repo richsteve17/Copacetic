@@ -21,6 +21,7 @@ import { DIMENSIONS } from '@/data/dimensions';
 import type { ModelId } from '@/data/models';
 import { MODELS, getModel } from '@/data/models';
 import { buildInstructionDoc, generateAllInstructions } from '@/data/instructions';
+import { BASE_SCORE } from '@/data/scenarios';
 import type { InstructionDoc } from '@/data/instructions';
 import { cn } from '@/lib/utils';
 
@@ -30,7 +31,9 @@ const MODEL_IDS = MODELS.map((m) => m.id);
 function averageScores(rs: RunRecord[]): Record<DimensionId, number> {
   const acc = {} as Record<DimensionId, number>;
   for (const d of DIMENSIONS) {
-    acc[d.id] = Math.round(rs.reduce((a, r) => a + (r.scores[d.id] ?? 0), 0) / rs.length);
+    acc[d.id] = rs.length
+      ? Math.round(rs.reduce((a, r) => a + (r.scores[d.id] ?? BASE_SCORE), 0) / rs.length)
+      : BASE_SCORE;
   }
   return acc;
 }
@@ -326,7 +329,7 @@ export default function Results() {
       <section className="mx-auto max-w-container px-[clamp(20px,4vw,48px)] py-[clamp(64px,10vh,110px)]">
         <SectionLabel index="03" title="YOUR INSTRUCTIONS" className="mb-12" />
         <p className="max-w-[64ch] text-body-lg text-ink-mid">
-          Same you, seven machines. These are generated from your dial positions with model-specific
+          Same you, {MODELS.length} machines. These are generated from your dial positions with model-specific
           mitigations — because &lsquo;be direct&rsquo; lands differently on Kimi than on Gemini.
         </p>
 

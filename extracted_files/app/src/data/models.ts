@@ -335,8 +335,17 @@ export const MODEL_CARD_INFO: Record<ModelId, {
   muse: { version: 'Muse Spark 1.2', teaser: '"Let\'s compose this together."', glaze: 1, backbone: 2, verbosity: 2 },
 };
 
+/** True when `id` names a model still present in the roster. */
+export const isKnownModel = (id: string): id is ModelId => MODELS.some((m) => m.id === id);
+
+/**
+ * Resolve a model profile. Runs are persisted in localStorage, so a saved run
+ * can outlive the roster entry it points at. Falling back keeps one stale
+ * record from taking down every page that renders it.
+ */
 export const getModel = (id: ModelId): ModelProfile => {
   const found = MODELS.find((m) => m.id === id);
-  if (!found) throw new Error(`Unknown model: ${id}`);
-  return found;
+  if (found) return found;
+  console.warn(`[copacetic] unknown model id "${id}" — falling back to ${MODELS[0].id}`);
+  return MODELS[0];
 };

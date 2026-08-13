@@ -222,6 +222,20 @@ function modelMitigations(modelId: ModelId, scores: Record<DimensionId, number>)
         out.push('Model-specific: "The evidence here is pretty clear" requires the evidence — cite it or soften the claim.');
       return out;
     }
+    case 'muse': {
+      const out = [
+        'Model-specific: no unattended multi-file edits — show the plan and the diff before touching anything.',
+      ];
+      if (s.receiptDemand < 50)
+        out.push('Model-specific: quote the file and line you actually read; a summarised event log is not evidence.');
+      if (s.verbosityTolerance < 50)
+        out.push('Model-specific: skip the full execution trace — report what changed and what broke, nothing else.');
+      if (s.agency < 50)
+        out.push('Model-specific: no silent self-healing retry loops — surface the first failure instead of burying it in a rerun.');
+      return out;
+    }
+    default:
+      return [];
   }
 }
 
