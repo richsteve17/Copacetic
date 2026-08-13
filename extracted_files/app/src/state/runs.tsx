@@ -1,7 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { DimensionId } from '@/data/dimensions';
+import { DIMENSIONS } from '@/data/dimensions';
 import type { ModelId } from '@/data/models';
+import { isKnownModel } from '@/data/models';
 
 export interface EventImpact {
   eventId: string;
@@ -31,12 +33,45 @@ interface RunsContextValue {
 
 const RunsContext = createContext<RunsContextValue | null>(null);
 
+/**
+ * Persisted runs outlive the code that wrote them, so a record can reference a
+ * retired model or predate a dial being added. Repair what is repairable and
+ * drop what is not — a malformed record must never reach the results page.
+ */
+function normalizeRun(raw: unknown): RunRecord | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const r = raw as Partial<RunRecord>;
+  if (typeof r.id !== 'string' || typeof r.modelId !== 'string') return null;
+  if (!isKnownModel(r.modelId)) return null;
+
+  const scores = {} as Record<DimensionId, number>;
+  for (const d of DIMENSIONS) {
+    const v = (r.scores as Record<string, unknown> | undefined)?.[d.id];
+    scores[d.id] = typeof v === 'number' && Number.isFinite(v) ? v : 50;
+  }
+
+  return {
+    id: r.id,
+    modelId: r.modelId,
+    scores,
+    copaceticIndex: typeof r.copaceticIndex === 'number' && Number.isFinite(r.copaceticIndex) ? r.copaceticIndex : 50,
+    costs: {
+      time: Number(r.costs?.time) || 0,
+      trust: Number(r.costs?.trust) || 0,
+      momentum: Number(r.costs?.momentum) || 0,
+    },
+    eventImpacts: Array.isArray(r.eventImpacts) ? r.eventImpacts : [],
+    createdAt: typeof r.createdAt === 'number' && Number.isFinite(r.createdAt) ? r.createdAt : Date.now(),
+  };
+}
+
 function loadRuns(): RunRecord[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as RunRecord[]) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(normalizeRun).filter((r): r is RunRecord => r !== null);
   } catch {
     return [];
   }

@@ -26,6 +26,12 @@ export function setStoredApiKey(key: string): void {
   }
 }
 
+/**
+ * Starting endpoint for each roster slot. These are suggestions, not
+ * guarantees — OpenRouter's catalog moves, and any slot can be repointed at
+ * any model in it via `setModelEndpoint`. `/connect` checks each one against
+ * the live catalog rather than asserting it resolves.
+ */
 export const DEFAULT_MODEL_MAP: Record<string, string> = {
   chatgpt: 'openai/gpt-5.6-sol',
   claude: 'anthropic/claude-opus-5',
@@ -36,6 +42,73 @@ export const DEFAULT_MODEL_MAP: Record<string, string> = {
   qwen: 'qwen/qwen3.8-max',
   muse: 'meta/muse-spark-1.2',
 };
+
+export const MODEL_ENDPOINT_OVERRIDES_STORAGE_KEY = 'copacetic_openrouter_endpoints';
+
+/** Per-slot endpoint overrides, keyed by roster model id. */
+export function getEndpointOverrides(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = localStorage.getItem(MODEL_ENDPOINT_OVERRIDES_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof v === 'string' && v.trim()) out[k] = v.trim();
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+function writeOverrides(next: Record<string, string>): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(MODEL_ENDPOINT_OVERRIDES_STORAGE_KEY, JSON.stringify(next));
+  } catch {
+    /* storage unavailable — overrides stay in memory for this page load */
+  }
+}
+
+/**
+ * Point a roster slot at any OpenRouter model id. Passing an empty value
+ * clears the override and restores the default.
+ */
+export function setModelEndpoint(modelId: string, endpoint: string): void {
+  const next = getEndpointOverrides();
+  const trimmed = endpoint.trim();
+  if (trimmed && trimmed !== DEFAULT_MODEL_MAP[modelId]) next[modelId] = trimmed;
+  else delete next[modelId];
+  writeOverrides(next);
+}
+
+export function resetModelEndpoint(modelId: string): void {
+  setModelEndpoint(modelId, '');
+}
+
+export function resetAllModelEndpoints(): void {
+  writeOverrides({});
+}
+
+/** The endpoint a slot actually runs against: override first, then default. */
+export function getModelEndpoint(modelId: string): string {
+  return getEndpointOverrides()[modelId] || DEFAULT_MODEL_MAP[modelId] || 'openai/gpt-4o';
+}
+
+/** The resolved endpoint for every slot, with a flag for which are customised. */
+export function getResolvedEndpointMap(modelIds: string[]): Record<string, { endpoint: string; custom: boolean }> {
+  const overrides = getEndpointOverrides();
+  const out: Record<string, { endpoint: string; custom: boolean }> = {};
+  for (const id of modelIds) {
+    out[id] = {
+      endpoint: overrides[id] || DEFAULT_MODEL_MAP[id] || 'openai/gpt-4o',
+      custom: Boolean(overrides[id]),
+    };
+  }
+  return out;
+}
 
 
 

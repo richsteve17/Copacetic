@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Download, ShieldCheck, Cpu, Terminal, FileCode, Check } from 'lucide-react';
+import { ShieldCheck, Cpu, Terminal, FileCode, Check } from 'lucide-react';
 import type { RunRecord } from '@/state/runs';
 import { getModel } from '@/data/models';
-import { getStoredApiKey, DEFAULT_MODEL_MAP } from '@/lib/openrouter';
+import { getStoredApiKey, getModelEndpoint } from '@/lib/openrouter';
 import { downloadText } from '@/components/results/CopyBlock';
 
 export default function ReceiptsCard({ run }: { run: RunRecord }) {
@@ -10,7 +10,7 @@ export default function ReceiptsCard({ run }: { run: RunRecord }) {
   const model = getModel(run.modelId);
   const apiKey = getStoredApiKey();
   const isLive = Boolean(apiKey);
-  const openRouterModel = DEFAULT_MODEL_MAP[run.modelId] || 'openai/gpt-4o';
+  const openRouterModel = getModelEndpoint(run.modelId);
 
   // Compute reproducible SHA-like checksum for audit verification
   const payloadString = JSON.stringify({
