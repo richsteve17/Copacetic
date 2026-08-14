@@ -62,7 +62,7 @@ function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
   );
 }
 
-/** Section 4 — The Seven Systems (marquee + dossier grid). */
+/** Section 4 — The Systems (marquee + dossier grid). */
 export default function SystemsSection() {
   return (
     <section className="relative overflow-hidden">

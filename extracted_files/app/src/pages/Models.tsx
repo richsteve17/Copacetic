@@ -14,7 +14,7 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const MODEL_IDS = new Set<string>(MODELS.map((m) => m.id));
 
-/** Model Profiles — seven research-backed behavior dossiers (design/models.md). */
+/** Model Profiles — one research-backed behavior dossier per roster system. */
 export default function Models() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ export default function Models() {
           <span className="text-human">]</span>
         </motion.p>
         <h1 className="mt-6 max-w-[16ch] text-display-lg text-ink-hi">
-          <WordSplit text="Seven systems. Seven documented personalities." />
+          <WordSplit text="Eight systems. Eight documented personalities." />
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -111,7 +111,7 @@ export default function Models() {
       {/* Section 2 — Roster grid */}
       <RosterGrid onFullProfile={scrollToProfile} />
 
-      {/* Sections 3–9 — The seven full profiles */}
+      {/* The full profiles, one section per system */}
       {MODELS.map((m, i) => (
         <ProfileSection
           key={m.id}

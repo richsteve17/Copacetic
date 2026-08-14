@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Copy, CopyPlus, Download } from 'lucide-react';
 import ModelSigil from '@/components/ModelSigil';
-import { getModel } from '@/data/models';
+import { getModel, MODELS } from '@/data/models';
 import type { InstructionDoc } from '@/data/instructions';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -154,7 +154,7 @@ export default function CopyBlock({ doc, generatedAt, copyAllPayload, notify }: 
           onClick={async () => morph(await copyText(copyAllPayload))}
           className="inline-flex items-center gap-2 rounded-[10px] border border-line-strong px-4 py-2 text-sm font-medium text-ink-mid transition-colors duration-200 hover:border-human hover:text-ink-hi"
         >
-          <CopyPlus size={16} /> Copy all seven
+          <CopyPlus size={16} /> Copy all {MODELS.length}
         </button>
       </div>
     </div>
